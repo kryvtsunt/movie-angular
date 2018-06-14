@@ -1,4 +1,4 @@
-<div *ngIf="movie">
+<div class="container container-fluid" *ngIf="movie">
   <header>
       <img src="{{img}}{{movie.poster_path}}">
     <h1>
@@ -8,5 +8,6 @@
       {{movie.overview}}
     </p>
   </header>
+  <button class="btn btn-danger">Like</button>
 
 </div>

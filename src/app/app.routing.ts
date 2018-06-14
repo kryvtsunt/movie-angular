@@ -6,11 +6,13 @@ import {MovieComponent} from './movie/movie.component';
 import {SearchComponent} from './search/search.component';
 import {NavbarComponent} from './navbar/navbar';
 import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'movie', pathMatch: 'full'},
-  {path: 'movie', component: NavbarComponent,
+  { path: '', redirectTo: 'app', pathMatch: 'full'},
+  {path: 'app', component: NavbarComponent,
     children: [
       // {path: '', redirectTo: 'home'},
       {path: 'home', component: HomeComponent},
@@ -19,6 +21,8 @@ const appRoutes: Routes = [
     ]
   },
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'movie/:id', component: MovieComponent},
   {path: 'test', component: OmdbTestComponent}
 ];

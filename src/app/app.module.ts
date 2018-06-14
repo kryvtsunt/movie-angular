@@ -14,6 +14,8 @@ import {SearchServiceClient} from './home/search.service.client';
 import {MovieComponent} from './movie/movie.component';
 import { SearchComponent } from './search/search.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from "./register/register.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {LoginComponent} from './login/login.component';
     AboutComponent,
     MovieComponent,
     SearchComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SearchServiceClient} from './search.service.client';
-import {Movie} from '../models/Movie';
+import {Movie} from '../models/movie.model.client';
 
 @Component({
   selector: 'app-home',

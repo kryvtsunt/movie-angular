@@ -1,5 +1,5 @@
 <div class="container container-fluid">
-  <h1>Login</h1>
+  <h1>Register</h1>
 
   <input [(ngModel)]="username"
          placeholder="username"
@@ -7,11 +7,15 @@
   <input [(ngModel)]="password"
          placeholder="password"
          class="form-control"/>
-  <button (click)="login(username, password)"
+  <input [(ngModel)]="password2"
+         placeholder="verify password"
+         class="form-control"/>
+  <button (click)="register(username, password)"
           class="btn btn-primary btn-block">
-    Login
+    Register
   </button>
 
-  <a routerLink="/register">Register  </a>
+  <a routerLink="/login">Login  </a>
   <a routerLink="">Home</a>
+
 </div>

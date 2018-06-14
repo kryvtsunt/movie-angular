@@ -10,18 +10,24 @@
     </span>
     </div>
   </form>
+
   <div *ngIf="results">
 
     <div *ngFor="let res of results">
+      <div class="list-group-item" style="margin: 10px; border: 1px white solid">
+        <div class="row">
+          <div class="col-md-9">
 
-      <div class="row">
-        <div class="col-md-12">
-          <div class="list-group-item" style="margin: 10px; border: 1px white solid">
             <h4><a routerLink="/movie/{{res.id}}">{{res.title}}</a></h4>
+            <p> {{res.overview.substring(0, 250)+'...' }} </p>
             <div>
               <strong>Genres: </strong>
               <span>Genre</span>
             </div>
+
+          </div>
+          <div class="col-md-3">
+            <img src="{{img}}{{res.poster_path}}" width="100">
           </div>
         </div>
       </div>

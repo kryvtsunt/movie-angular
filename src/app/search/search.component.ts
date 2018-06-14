@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Movie} from "../models/Movie";
+import {Movie} from '../models/movie.model.client';
 import {SearchServiceClient} from '../home/search.service.client';
 import {ActivatedRoute} from '@angular/router';
 
@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class SearchComponent implements OnInit {
   title: String;
   results: Movie[]
+  img = 'https://image.tmdb.org/t/p/w500/'
   constructor(private searchServie: SearchServiceClient, private route: ActivatedRoute) {
     this.route.params.subscribe(
       params => this.setParams(params));
