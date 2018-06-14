@@ -1,0 +1,31 @@
+<div>
+  <h1> Advanced Search</h1>
+  <p> Use this app to browse new releases and find your favourite movies </p>
+  <form>
+    <div class="form-group">
+      <span class="input-group">
+      <input type="text" name="title" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control"
+             placeholder="Search a movie">
+      <button class="btn btn-success" (click)="searchMoovie(title)">Search</button>
+    </span>
+    </div>
+  </form>
+  <div *ngIf="results">
+
+    <div *ngFor="let res of results">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="list-group-item" style="margin: 10px; border: 1px white solid">
+            <h4><a routerLink="/movie/{{res.id}}">{{res.title}}</a></h4>
+            <div>
+              <strong>Genres: </strong>
+              <span>Genre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

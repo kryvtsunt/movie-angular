@@ -1,0 +1,46 @@
+<div class="row">
+
+  <div class="container-fluid">
+    <label>Movie Title</label>
+    <input [(ngModel)]="title" class="form-control"/>
+    <button (click)="searchMovie(title)" class="btn btn-block btn-primary"> Search</button>
+
+  </div>
+  <div class="col-6">
+    <div class="container-fluid">
+      <h1> OMDB API</h1>
+
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let movie of result.Search">
+          <div class="row">
+            <div class="col-8">
+              {{movie.Title}}
+            </div>
+            <div class="col-4">
+              <img src={{movie.Poster}} width="100">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-6">
+
+    <div class="container-fluid">
+      <h1> TMDB API</h1>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let movie of result2.results">
+          <div class="row">
+            <div class="col-8">
+              {{movie.title}}
+            </div>
+            <div class="col-4">
+              <img src="{{img}}{{movie.poster_path}}" width="100">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
