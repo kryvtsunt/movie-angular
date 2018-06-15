@@ -8,6 +8,8 @@
       {{movie.overview}}
     </p>
   </header>
-  <button *ngIf="loggedIn" class="btn btn-danger">Like</button>
+  <button *ngIf="loggedIn && liked" (click)="like()" class="btn btn-danger fas fa-heart"></button>
+  <button *ngIf="loggedIn && !liked" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>
+  <button *ngIf="loggedIn" (click)="like()" class="btn btn-outline-warning fas fa-bookmark"></button>
 
 </div>

@@ -14,6 +14,11 @@ export class ProfileComponent implements OnInit {
   }
 
   user: User = new User();
+  edit: boolean;
+
+  toggleEdit(){
+    this.edit = !this.edit;
+  }
 
   update(u: User) {
     this.service.updateUser(u).then((resp) => {
@@ -34,6 +39,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.edit = false;
     this.service
       .profile()
       .then(user => {

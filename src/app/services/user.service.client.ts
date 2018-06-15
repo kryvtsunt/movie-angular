@@ -63,6 +63,28 @@ export class UserServiceClient {
     });
   }
 
+  like(movie) {
+    return fetch('http://localhost:4000/api/like/movie', {
+      body: JSON.stringify(movie),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+
+  checkLike(movieId) {
+    return fetch('http://localhost:4000/api/like/movie/' + movieId, {
+      credentials: 'include', // include, same-origin, *omit
+      method: 'get',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then (response => response.json());
+  }
+
   updateUser(user) {
     return fetch('http://localhost:4000/api/user/update', {
       body: JSON.stringify(user),

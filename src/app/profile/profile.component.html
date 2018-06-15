@@ -1,22 +1,30 @@
 <div class="container container-fluid">
   <h1>Profile</h1>
+  <button class="btn btn-info" (click)="toggleEdit()"> Edit</button>
+  <div *ngIf="edit">
+    <input [(ngModel)]="user.username"
+           placeholder="username"
+           class="form-control"/>
+    <input [(ngModel)]="user.firstName"
+           placeholder="first name"
+           class="form-control"/>
+    <input [(ngModel)]="user.lastName"
+           placeholder="lastName"
+           class="form-control"/>
+    <input [(ngModel)]="user.email"
+           placeholder="email"
+           class="form-control"/>
+    <button (click)="update(user)"
+            class="btn btn-primary btn-block">
+      Update
+    </button>
+  </div>
 
-  <input [(ngModel)]="user.username"
-         placeholder="username"
-         class="form-control"/>
-  <input [(ngModel)]="user.firstName"
-         placeholder="first name"
-         class="form-control"/>
-  <input [(ngModel)]="user.lastName"
-         placeholder="lastName"
-         class="form-control"/>
-  <input [(ngModel)]="user.email"
-         placeholder="email"
-         class="form-control"/>
-  <button (click)="update(user)"
-          class="btn btn-primary btn-block">
-    Update
-  </button>
+  <div *ngIf="!edit">
+    <h3> {{user.username}}</h3>
+    <h4> {{user.firstName}}</h4>
+    <h4> {{user.lastName}} </h4>
+  </div>
 
   <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   <button class="btn btn-block btn-secondary" routerLink="">Home</button>
