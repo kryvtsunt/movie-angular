@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from '../models/movie.model.client';
-import {SearchServiceClient} from '../home/search.service.client';
+import {SearchServiceClient} from '../services/search.service.client';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   }
   searchMoovie() {
     console.log(this.title);
-    this.searchServie.searchMovieByTitle(this.title).subscribe((obj) => {this.results = obj.results} );
+    this.searchServie.searchMovieByTitle(this.title).then((response) => {this.results = response.results} );
     // const url = 'https://api.themoviedb.org/3/search/movie?api_key=01202464e80fb52cd90af159ba329661&query=' + title
     // return this.httpClient.get<Object>(url);
   }

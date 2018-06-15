@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {SearchServiceClient} from '../home/search.service.client';
+import {Component, OnInit} from '@angular/core';
+import {SearchServiceClient} from '../services/search.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {Movie} from '../models/movie.model.client';
+import {UserServiceClient} from "../services/user.service.client";
 
 @Component({
   selector: 'app-movie',
@@ -12,16 +13,23 @@ export class MovieComponent implements OnInit {
 
   movie: Movie
   img = 'https://image.tmdb.org/t/p/w500/';
+  loggedIn: boolean;
 
-  constructor(private searchServie: SearchServiceClient, private route: ActivatedRoute) {
+  constructor(private userService: UserServiceClient, private searchService: SearchServiceClient, private route: ActivatedRoute) {
+  }
+
+  checkStatus() {
+    this.userService.checkStatus().then(response => this.loggedIn = response);
   }
 
   ngOnInit() {
+    this.checkStatus();
     this.route.params.subscribe(
       params => {
-        this.searchServie.searchMoovieById(params.id)
-          .subscribe(movie => {
-            this.movie = movie
+        this.searchService.searchMoovieById(params.id)
+          .then(movie => {
+            this.movie = movie;
+            this.checkStatus();
           });
       })
   }

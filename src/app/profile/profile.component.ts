@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user.model.client';
-
+import {UserServiceClient} from '../services/user.service.client';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -9,14 +10,26 @@ import {User} from '../models/user.model.client';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private service: UserServiceClient) { }
 
   user: User = new User();
   update(user: User) {
     console.log(user);
   }
 
+  logout() {
+    this.service.logout()
+      .then(() =>
+        this.router.navigate(['tk/home']));
+  }
+
   ngOnInit() {
+    this.service
+      .profile()
+      .then(user => this.user = user);
+    // this.service
+    //   .findUserById('5b1ec6c2d06a450655254f14')
+    //   .then(user => this.user = user);
   }
 
 }

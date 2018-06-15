@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   password;
   login(username, password) {
     console.log([username, password]);
-    this.router.navigate(['profile']);
+    this.router.navigate(['tk/profile']);
   }
 
   constructor(private router: Router) { }

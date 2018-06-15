@@ -8,6 +8,6 @@
       {{movie.overview}}
     </p>
   </header>
-  <button class="btn btn-danger">Like</button>
+  <button *ngIf="loggedIn" class="btn btn-danger">Like</button>
 
 </div>

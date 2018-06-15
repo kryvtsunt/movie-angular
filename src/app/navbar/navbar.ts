@@ -1,13 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserServiceClient} from '../services/user.service.client';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],
 })
+
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  loggedIn: boolean;
+
+  constructor(private userService: UserServiceClient, private router: Router) {
+    router.events.subscribe(() => {
+      this.checkStatus();
+    });
+  }
+
+  checkStatus() {
+    this.userService.checkStatus().then(response => this.loggedIn = response);
+  }
 
   ngOnInit() {
   }
