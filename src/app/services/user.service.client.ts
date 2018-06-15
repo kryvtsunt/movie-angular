@@ -5,6 +5,7 @@ export class UserServiceClient {
       .then(response => response.json());
   }
 
+
   profile() {
     return fetch('http://localhost:4000/api/profile',
       {
@@ -19,6 +20,21 @@ export class UserServiceClient {
         credentials: 'include', // include, same-origin, *omit
       })
       .then(response => response.json());
+  }
+  login(username, password) {
+    const credentials = {
+      username: username,
+      password: password
+    };
+    return fetch('http://localhost:4000/api/login',
+      {
+        body: JSON.stringify(credentials),
+        credentials: 'include', // include, same-origin, *omit
+        method: 'post',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
   }
 
   logout() {
@@ -45,5 +61,18 @@ export class UserServiceClient {
         'content-type': 'application/json'
       }
     });
+  }
+
+  updateUser(user) {
+    return fetch('http://localhost:4000/api/user/update', {
+      body: JSON.stringify(user),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(response =>
+      response.json()
+    )
   }
 }
