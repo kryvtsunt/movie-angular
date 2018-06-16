@@ -1,23 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class LikeServiceClient {
+export class BookmarkServiceClient {
 
-  like(movie) {
-    return fetch('http://localhost:4000/api/like/movie/add', {
-      body: JSON.stringify(movie),
-      credentials: 'include', // include, same-origin, *omit
-      method: 'post',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-  }
-  unlike(movie) {
-    return fetch('http://localhost:4000/api/like/movie/remove', {
+  bookmark(movie) {
+    return fetch('http://localhost:4000/api/bookmark/movie/add', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -27,8 +14,19 @@ export class LikeServiceClient {
     })
   }
 
-  checkLike(movieId) {
-    return fetch('http://localhost:4000/api/like/movie/' + movieId + '/check', {
+  unbookmark(movie) {
+    return fetch('http://localhost:4000/api/bookmark/movie/remove', {
+      body: JSON.stringify(movie),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+
+  checkBookmark(movieId) {
+    return fetch('http://localhost:4000/api/bookmark/movie/' + movieId + '/check', {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
       headers: {

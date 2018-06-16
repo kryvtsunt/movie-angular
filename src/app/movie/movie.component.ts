@@ -5,7 +5,9 @@ import {Movie} from '../models/movie.model.client';
 import {Comment} from '../models/comment.model.client';
 import {UserServiceClient} from '../services/user.service.client';
 import {CommentServiceClient} from '../services/comment.service.client';
-import {MovieServiceClient} from "../services/movie.service.client";
+import {MovieServiceClient} from '../services/movie.service.client';
+import {LikeServiceClient} from '../services/like.service.client';
+import {BookmarkServiceClient} from '../services/bookmark.service.client';
 
 @Component({
   selector: 'app-movie',
@@ -20,10 +22,13 @@ export class MovieComponent implements OnInit {
   img = 'https://image.tmdb.org/t/p/w500/';
   loggedIn: boolean;
   liked: boolean;
+  bookmarked: boolean;
   numberOfLikes: number;
 
-  constructor(private movieService: MovieServiceClient, private commentService: CommentServiceClient, private userService: UserServiceClient, private searchService: SearchServiceClient, private route: ActivatedRoute) {
-  }
+  constructor(private bookmarkService: BookmarkServiceClient, private likeService: LikeServiceClient,
+              private movieService: MovieServiceClient, private commentService: CommentServiceClient,
+              private userService: UserServiceClient, private searchService: SearchServiceClient,
+              private route: ActivatedRoute) {}
 
   checkStatus() {
     this.userService.checkStatus().then(response => {
@@ -32,13 +37,13 @@ export class MovieComponent implements OnInit {
   }
 
   checkLike() {
-    this.userService.checkLike(this.movie.id).then((response) => {
+    this.likeService.checkLike(this.movie.id).then((response) => {
       this.liked = response;
     })
   }
 
   like() {
-    this.userService.like(this.movie)
+    this.likeService.like(this.movie)
       .then(() => {
         this.checkLike();
         this.countLikes();
@@ -46,10 +51,29 @@ export class MovieComponent implements OnInit {
   }
 
   unlike() {
-    this.userService.unlike(this.movie)
+    this.likeService.unlike(this.movie)
       .then(() => {
         this.checkLike();
         this.countLikes();
+      });
+  }
+  checkBookmark() {
+    this.bookmarkService.checkBookmark(this.movie.id).then((response) => {
+      this.bookmarked = response;
+    })
+  }
+
+  bookmark() {
+    this.bookmarkService.bookmark(this.movie)
+      .then(() => {
+        this.checkBookmark();
+      });
+  }
+
+  unbookmark() {
+    this.bookmarkService.unbookmark(this.movie)
+      .then(() => {
+        this.checkBookmark();
       });
   }
 
@@ -91,6 +115,7 @@ export class MovieComponent implements OnInit {
             {
               this.checkStatus();
               this.checkLike();
+              this.checkBookmark();
               this.countLikes();
               this.findAllComments();
             }

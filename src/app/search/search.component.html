@@ -27,7 +27,12 @@
 
           </div>
           <div class="col-md-3">
+            <div *ngIf="res.poster_path; else poster">
             <img src="{{img}}{{res.poster_path}}" width="100">
+            </div>
+            <ng-template #poster>
+              <img src="http://a-movies.info/public/img/no_poster.jpg" width="100">
+            </ng-template>
           </div>
         </div>
       </div>
