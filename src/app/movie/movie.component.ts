@@ -39,12 +39,18 @@ export class MovieComponent implements OnInit {
 
   like() {
     this.userService.like(this.movie)
-      .then(() => this.checkLike());
+      .then(() => {
+        this.checkLike();
+        this.countLikes();
+      });
   }
 
   unlike() {
     this.userService.unlike(this.movie)
-      .then(() => this.checkLike());
+      .then(() => {
+        this.checkLike();
+        this.countLikes();
+      });
   }
 
   findAllComments() {
@@ -57,12 +63,12 @@ export class MovieComponent implements OnInit {
 
   countLikes() {
     this.movieService.getMovie(this.movie.id).then((ls) => {
-        const movie = ls.movie;
-        if (movie === null){
-          this.numberOfLikes = 0;
-        } else {
-          this.numberOfLikes = movie.likes;
-        }
+      const movie = ls.movie;
+      if (movie === null) {
+        this.numberOfLikes = 0;
+      } else {
+        this.numberOfLikes = movie.likes;
+      }
     };
   }
 
