@@ -18,6 +18,9 @@ import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {UserServiceClient} from './services/user.service.client';
 import { AdminComponent } from './admin/admin.component';
+import {CommentServiceClient} from "./services/comment.service.client";
+import {LikeServiceClient} from "./services/like.service.client";
+import {MovieServiceClient} from "./services/movie.service.client";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,7 @@ import { AdminComponent } from './admin/admin.component';
     HttpClientModule,
     routing
   ],
-  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient],
+  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient, MovieServiceClient, CommentServiceClient, LikeServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -64,7 +64,17 @@ export class UserServiceClient {
   }
 
   like(movie) {
-    return fetch('http://localhost:4000/api/like/movie', {
+    return fetch('http://localhost:4000/api/like/movie/add', {
+      body: JSON.stringify(movie),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+  unlike(movie) {
+    return fetch('http://localhost:4000/api/like/movie/remove', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -75,7 +85,7 @@ export class UserServiceClient {
   }
 
   checkLike(movieId) {
-    return fetch('http://localhost:4000/api/like/movie/' + movieId, {
+    return fetch('http://localhost:4000/api/like/movie/' + movieId + '/check', {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
       headers: {
@@ -84,6 +94,7 @@ export class UserServiceClient {
     })
       .then (response => response.json());
   }
+
 
   updateUser(user) {
     return fetch('http://localhost:4000/api/user/update', {

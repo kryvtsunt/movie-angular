@@ -13,9 +13,7 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
 
   constructor(private userService: UserServiceClient, private router: Router) {
-    router.events.subscribe(() => {
-      this.checkStatus();
-    });
+
   }
 
   checkStatus() {
@@ -23,6 +21,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe(() => {
+      this.checkStatus();
+    });
   }
 
 }

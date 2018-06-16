@@ -8,11 +8,43 @@
       {{movie.overview}}
     </p>
   </header>
+  <p> Number of likes: {{numberOfLikes}}</p>
   <div *ngIf="loggedIn" class="input-group">
     <div [(ngSwitch)]="liked">
-      <button *ngSwitchCase="true"  class="btn btn-danger fas fa-heart"></button>
+      <button *ngSwitchCase="true" (click)="unlike()" class="btn btn-danger fas fa-heart"></button>
       <button *ngSwitchCase="false" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>
     </div>
-    <button *ngIf="loggedIn" class="btn btn-outline-warning fas fa-bookmark"></button>
+    <button class="btn btn-outline-warning fas fa-bookmark"></button>
+    <input type="text" name="title" [(ngModel)]="com" class="form-control"
+           placeholder="Add Comment">
+    <button class="btn btn-success fa fa-plus" (click)="addComment()"></button>
   </div>
+
+
+  <div *ngIf="comments">
+    <div *ngFor="let res of comments">
+      <div class="row container-fluid container list-group-item" style="padding: 5px; margin: 5px">
+        <div class="col-md-2">
+
+          <h5>{{res.username}}</h5>
+
+        </div>
+        <div class="col-md-8">
+          <p> {{res.comment}} </p>
+        </div>
+        <div class="col-md-2">
+          <p> {{res.date.split("G")[0]}} </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
 </div>
