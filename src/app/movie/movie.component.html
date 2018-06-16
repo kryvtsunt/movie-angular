@@ -1,6 +1,6 @@
 <div class="container container-fluid" *ngIf="movie">
   <header>
-      <img src="{{img}}{{movie.poster_path}}">
+    <img src="{{img}}{{movie.poster_path}}">
     <h1>
       {{movie.title}}
     </h1>
@@ -8,8 +8,11 @@
       {{movie.overview}}
     </p>
   </header>
-  <button *ngIf="loggedIn && liked" (click)="like()" class="btn btn-danger fas fa-heart"></button>
-  <button *ngIf="loggedIn && !liked" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>
-  <button *ngIf="loggedIn" (click)="like()" class="btn btn-outline-warning fas fa-bookmark"></button>
-
+  <div *ngIf="loggedIn" class="input-group">
+    <div [(ngSwitch)]="liked">
+      <button *ngSwitchCase="true"  class="btn btn-danger fas fa-heart"></button>
+      <button *ngSwitchCase="false" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>
+    </div>
+    <button *ngIf="loggedIn" class="btn btn-outline-warning fas fa-bookmark"></button>
+  </div>
 </div>

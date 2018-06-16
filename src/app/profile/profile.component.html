@@ -1,6 +1,7 @@
 <div class="container container-fluid">
   <h1>Profile</h1>
-  <button class="btn btn-info" (click)="toggleEdit()"> Edit</button>
+  <button class="btn btn-info btn-block" (click)="toggleEdit()"> Edit</button>
+
   <div *ngIf="edit">
     <input [(ngModel)]="user.username"
            placeholder="username"
@@ -9,10 +10,13 @@
            placeholder="first name"
            class="form-control"/>
     <input [(ngModel)]="user.lastName"
-           placeholder="lastName"
+           placeholder="last name"
            class="form-control"/>
     <input [(ngModel)]="user.email"
            placeholder="email"
+           class="form-control"/>
+    <input [(ngModel)]="user.img_path"
+           placeholder="image"
            class="form-control"/>
     <button (click)="update(user)"
             class="btn btn-primary btn-block">
@@ -20,7 +24,8 @@
     </button>
   </div>
 
-  <div *ngIf="!edit">
+  <div *ngIf="!edit" class="text-center">
+    <img src="{{user.img_path}}" class="rounded mx-auto d-block" style="border: 2px solid white;"/>
     <h3> {{user.username}}</h3>
     <h4> {{user.firstName}}</h4>
     <h4> {{user.lastName}} </h4>

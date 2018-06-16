@@ -8,10 +8,12 @@ import {NavbarComponent} from './navbar/navbar';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AdminComponent} from "./admin/admin.component";
 
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'tk', pathMatch: 'full'},
+  {path: 'admin', component: AdminComponent},
   {path: 'tk', component: NavbarComponent,
     children: [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
