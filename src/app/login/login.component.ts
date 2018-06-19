@@ -9,25 +9,52 @@ import {UserServiceClient} from "../services/user.service.client";
 })
 export class LoginComponent implements OnInit {
 
-  username;
-  password;
+  username: String;
+  password: String;
+  credentialsError: boolean;
+  noUsernameError: boolean;
+  noPasswordError: boolean;
 
-  login(username, password) {
-    console.log([username, password]);
-    this.userService.login(username, password).then((response) => {
-      if (response.status === 200) {
-        this.router.navigate(['tk/profile']);
-      } else {
-        alert('Wrong Credentials');
-      }
-    })
-
+  resetErrors() {
+    this.credentialsError = false;
+    this.noUsernameError = false;
+    this.noPasswordError = false;
   }
 
-  constructor(private router: Router, private userService: UserServiceClient) {
+  reset() {
+    this.username = '';
+    this.password = '';
+  }
+
+
+  login() {
+    this.resetErrors();
+    if (this.username === '') {
+      this.noUsernameError = true;
+    } else {
+      if (this.password === '') {
+        this.noPasswordError = true;
+      } else {
+        this.service.login(this.username, this.password)
+          .then((response) => {
+            if (response !== null) {
+              console.log(response);
+              this.router.navigate(['profile']);
+            } else {
+              this.credentialsError = true;
+            }
+          });
+      }
+    }
+  }
+
+  constructor(private router: Router,
+              private service: UserServiceClient) {
   }
 
   ngOnInit() {
+    this.reset();
+    this.resetErrors();
   }
 
 }

@@ -93,7 +93,7 @@ export class MovieComponent implements OnInit {
       } else {
         this.numberOfLikes = movie.likes;
       }
-    };
+    });
   }
 
   addComment() {

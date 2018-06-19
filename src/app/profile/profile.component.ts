@@ -15,21 +15,24 @@ export class ProfileComponent implements OnInit {
 
   user: User = new User();
   edit: boolean;
+  admin = false;
 
-  toggleEdit(){
+  toggleEdit() {
     this.edit = !this.edit;
   }
 
   update(u: User) {
+    if (u.img_path === '') {
+      u.img_path = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100'
+    }
     this.service.updateUser(u).then((resp) => {
-      console.log('resp ' + resp.firstName);
       this.service
         .profile()
         .then(user => {
           this.user = user;
-          console.log(user)
-        })
-    })
+          console.log(user);
+        });
+    });
   }
 
   logout() {
@@ -44,11 +47,11 @@ export class ProfileComponent implements OnInit {
       .profile()
       .then(user => {
         this.user = user;
-        console.log(user)
+        if (user.role === 'admin') {
+          this.admin = true;
+        }
       });
-    // this.service
-    //   .findUserById('5b1ec6c2d06a450655254f14')
-    //   .then(user => this.user = user);
+
   }
 
 }

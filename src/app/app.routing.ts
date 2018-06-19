@@ -12,21 +12,18 @@ import {AdminComponent} from "./admin/admin.component";
 
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: 'tk', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'admin', component: AdminComponent},
-  {path: 'tk', component: NavbarComponent,
-    children: [
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'home', component: HomeComponent},
-      {path: 'about', component: AboutComponent},
-      {path: 'search', component: SearchComponent},
-      {path: 'profile', component: ProfileComponent},
-      {path: 'movie/:id', component: MovieComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
-      {path: 'test', component: OmdbTestComponent}
-    ]
-  }
+  // {path: 'tk', component: NavbarComponent}
+  // {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'search', component: SearchComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'movie/:id', component: MovieComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'test', component: OmdbTestComponent}
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

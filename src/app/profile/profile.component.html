@@ -1,11 +1,18 @@
-<div class="container container-fluid">
+<div class="container">
   <h1>Profile</h1>
-  <button class="btn btn-info btn-block" (click)="toggleEdit()"> Edit</button>
-
+  <i *ngIf="!edit" class="btn btn-info float-left fas fa-toggle-off" (click)="toggleEdit()" style="margin-bottom: 10px">
+    Edit</i>
+  <i *ngIf="edit" class="btn btn-info float-left fas fa-toggle-on" (click)="toggleEdit()" style="margin-bottom: 10px">
+    Edit</i>
+  <br/>
   <div *ngIf="edit">
     <input [(ngModel)]="user.username"
            placeholder="username"
            class="form-control"/>
+    <input [(ngModel)]="user.password"
+           placeholder="password"
+           class="form-control"
+           type="password"/>
     <input [(ngModel)]="user.firstName"
            placeholder="first name"
            class="form-control"/>
@@ -15,23 +22,60 @@
     <input [(ngModel)]="user.email"
            placeholder="email"
            class="form-control"/>
+    <input [(ngModel)]="user.phone"
+           placeholder="Phone"
+           class="form-control"/>
+    <input [(ngModel)]="user.address"
+           placeholder="Address"
+           class="form-control"/>
     <input [(ngModel)]="user.img_path"
-           placeholder="image"
+           placeholder="Image url"
            class="form-control"/>
     <button (click)="update(user)"
-            class="btn btn-primary btn-block">
+            class="btn btn-primary btn-block "
+            style="margin-top: 10px">
+
+
       Update
     </button>
   </div>
 
-  <div *ngIf="!edit" class="text-center">
-    <img src="{{user.img_path}}" class="rounded mx-auto d-block" style="border: 2px solid white;"/>
-    <h3> {{user.username}}</h3>
-    <h4> {{user.firstName}}</h4>
-    <h4> {{user.lastName}} </h4>
+  <div *ngIf="!edit" class="text-center container row">
+    <div class="col-md-6 col-lg6">
+      <img src="{{user.img_path}}" alt="Smiley face" width="300px" class="rounded mx-auto d-block" style="border: 2px solid white;"/>
+    </div>
+    <div class="col-md-6 col-lg6">
+      <div class="row">
+        <div class="col-6">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> <strong>Username: </strong></li>
+          <li class="list-group-item"> <strong>First Name:</strong> </li>
+          <li class="list-group-item"> <strong>Last Name: </strong></li>
+          <li class="list-group-item"> <strong>Email: </strong></li>
+          <li class="list-group-item"> <strong>Phone: </strong></li>
+          <li class="list-group-item"> <strong>Address: </strong></li>
+        </ul>
+        </div>
+        <div class="col-6 ">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> {{user.username}}</li>
+          <li class="list-group-item"> {{user.firstName}}</li>
+          <li class="list-group-item">{{user.lastName}} </li>
+          <li class="list-group-item"> {{user.email}} </li>
+          <li class="list-group-item"> {{user.phone}} </li>
+          <li class="list-group-item">{{user.address}} </li>
+        </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
-  <button class="btn btn-block btn-secondary" routerLink="">Home</button>
+  <div style="margin-top: 10px">
+    <button *ngIf="!admin" class="btn btn-block btn-secondary" routerLink="">Home</button>
+    <button *ngIf="admin" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
+    <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
+  </div>
 
 </div>
+
+
