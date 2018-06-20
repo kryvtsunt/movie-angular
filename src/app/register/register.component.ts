@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserServiceClient} from "../services/user.service.client";
+import {User} from '../models/user.model.client';
 
 @Component({
   selector: 'app-register',
@@ -13,15 +14,15 @@ export class RegisterComponent implements OnInit {
               private service: UserServiceClient) {
   }
 
-  username: String;
-  password: String;
-  password2: String;
+  username: string;
+  password: string;
+  password2: string;
   usernameError: boolean;
   passwordError: boolean;
   noUsernameError: boolean;
   noPasswordError: boolean;
   noPassword2Error: boolean;
-  img_path = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100';
+  // img_path = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100';
 
   resetErrors() {
     this.usernameError = false;
@@ -53,8 +54,10 @@ export class RegisterComponent implements OnInit {
               .then((response) => {
                 console.log(response);
                 if (response === null) {
-                  this.service
-                    .createUser(this.username, this.password, this.img_path)
+                  const user: User = new User();
+                  user.username = this.username;
+                  user.password = this.password;
+                  this.service.register(user)
                     .then(() => this.router.navigate(['profile']));
                 } else {
                   this.usernameError = true;

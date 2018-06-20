@@ -1,6 +1,10 @@
 // const HOST = 'https://tk-course-management-nodejs.herokuapp.com/';
 
+
+
 const HOST = 'http://localhost:4000/';
+
+import {User} from '../models/user.model.client';
 
 export class UserServiceClient {
 
@@ -14,7 +18,7 @@ export class UserServiceClient {
       .then(response => response.json());
   }
 
-  deleteUser(userId) {
+  deleteUserById(userId) {
     return fetch(HOST + 'api/user/' + userId + '/delete', {
       method: 'delete'
     })
@@ -43,6 +47,18 @@ export class UserServiceClient {
     return fetch(HOST + 'api/user/update', {
       body: JSON.stringify(user),
       credentials: 'include', // include, same-origin, *omit
+      method: 'put',
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(response =>
+      response.json()
+    );
+  }
+
+  updateUserById(userId, user) {
+    return fetch(HOST + 'api/user/' + userId + '/update', {
+      body: JSON.stringify(user),
       method: 'put',
       headers: {
         'content-type': 'application/json'
@@ -91,14 +107,20 @@ export class UserServiceClient {
       .then(response => response.json());
   }
 
-  createUser(username, password) {
-    const user = {
-      username: username,
-      password: password,
-    };
-    return fetch(HOST + 'api/user', {
+  register(user: User) {
+    return fetch(HOST + 'api/register', {
       body: JSON.stringify(user),
       credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
+  createUser(user: User) {
+    return fetch(HOST + 'api/user', {
+      body: JSON.stringify(user),
       method: 'post',
       headers: {
         'content-type': 'application/json'

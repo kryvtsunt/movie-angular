@@ -8,4 +8,7 @@ export class User {
   phone: string;
   address: string;
   img_path: string;
+  gender: string;
+  role: string;
+  dateB: string;
 }

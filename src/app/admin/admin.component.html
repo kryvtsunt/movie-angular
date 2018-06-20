@@ -1,73 +1,133 @@
-
-<div *ngIf="admin" class="container">
+<!--<div class="sidenav">-->
+<!--<i class=" fa fa-2x fa-users"></i>-->
+<!--<i class=" fa fa-2x fa-user"></i>-->
+<!--<i class=" fa fa-2x fa-edit"></i>-->
+<!--</div>-->
+<div *ngIf="admin" class="container-fluid text-center">
   <br/>
-  <div class="row">
-    <div class="col-md-3">
-      <h4>Course List</h4>
-      <div>
-        <ul class="list-group">
-          <button class="list-group-item list-group-item-action">
-            Option
+  <h4>List of Users</h4>
+  <table class="table table-responsive table-bordred table-striped">
+    <thead>
+    <th>Image</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Date of Birth</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Gender</th>
+    <th>Role</th>
+    <th></th>
+    <th></th>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-light btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{user.img_path}}" width="20px"> Img
           </button>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <h4>List of Users</h4>
-      <table class="table table-responsive table-bordred table-striped">
-        <thead>
-        <th>Username</th>
-        <th>Password</th>
-        <th></th>
-        <th></th>
-        </thead>
-        <tbody>
-        <tr>
-          <td><input [(ngModel)]="userName"
-                     placeholder="User name"
-                     class="form-control"/></td>
-          <td><input [(ngModel)]="password"
-                     placeholder="Number of Seats"
-                     class="form-control"/></td>
-          <td>
-            <p *ngIf="!editMode" data-placement="top" data-toggle="tooltip" title="Add">
-              <button (click)="createUser()"
-                      class="btn btn-success btn-xs fa fa-plus"></button>
-            </p>
-            <p *ngIf="editMode" data-placement="top" data-toggle="tooltip" title="Add">
-              <button (click)="updateUser()"
-                      class="btn btn-success btn-xs fa fa-upload"></button>
-            </p>
-          </td>
-          <td>
-            <p data-placement="top" data-toggle="tooltip" title="Clean">
-              <button (click)="cleanData()"
-                      class="btn btn-danger btn-xs fa fa-times"></button>
-            </p>
-          </td>
-        </tr>
-        <tr *ngFor="let user of users">
-          <td>{{user.name}}</td>
-          <td>{{user.seats}}</td>
-          <td>
-            <p data-placement="top" data-toggle="tooltip" title="Edit">
-              <button (click)="editUser(user.username, user.password, user._id)"
-                      class="btn btn-primary btn-xs fa fa-edit"></button>
-            </p>
-          </td>
-          <td>
-            <p data-placement="top" data-toggle="tooltip" title="Delete">
-              <button
-                (click)="deleteUser(user._id)"
-                class="btn btn-danger btn-xs fa fa-trash"></button>
-            </p>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button (click)="user.img_path = boyImg" class="dropdown-item"><img src="{{boyImg}}" width="50px"> Boy
+            </button>
+            <button (click)="user.img_path = girlImg" class="dropdown-item"><img src="{{girlImg}}" width="50px"> Girl
+            </button>
+            <button (click)="user.img_path = boyImg2" class="dropdown-item"><img src="{{boyImg2}}" width="50px"> Man
+            </button>
+            <button (click)="user.img_path = girlImg2" class="dropdown-item"><img src="{{girlImg2}}" width="50px"> Woman
+            </button>
+          </div>
+        </div>
+      </td>
+      <td><input [(ngModel)]="user.username"
+                 placeholder="Username"
+                 class="form-control"/></td>
+      <td><input [(ngModel)]="user.password"
+                 placeholder="Pssword"
+                 class="form-control"
+                 type="password"/></td>
+      <td><input [(ngModel)]="user.firstName"
+                 placeholder="First Name"
+                 class="form-control"/></td>
+      <td><input [(ngModel)]="user.lastName"
+                 placeholder="Last Name"
+                 class="form-control"/></td>
+      <td><input [(ngModel)]="user.dateB"
+                 placeholder="Date of Birth"
+                 type="date"
+                 class="form-control"/></td>
+      <td><input [(ngModel)]="user.address"
+                 placeholder="Address"
+                 class="form-control"/></td>
+      <td><input [(ngModel)]="user.phone"
+                 placeholder="Phone"
+                 class="form-control"/></td>
+      <td>
+        <div class="form-group">
+          <!--<label for="selectRole">Select role:</label>-->
+          <select [(ngModel)]="user.gender" class="form-control" id="selectGender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <div class="form-group">
+          <!--<label for="selectRole">Select role:</label>-->
+          <select [(ngModel)]="user.role" class="form-control" id="selectRole">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <p *ngIf="!editMode" data-placement="top" data-toggle="tooltip" title="Add">
+          <button (click)="createUser()"
+                  class="btn btn-success btn-xs fa fa-plus"></button>
+        </p>
+        <p *ngIf="editMode" data-placement="top" data-toggle="tooltip" title="Add">
+          <button (click)="updateUser()"
+                  class="btn btn-success btn-xs fa fa-upload"></button>
+        </p>
+      </td>
+      <td>
+        <p data-placement="top" data-toggle="tooltip" title="Clean">
+          <button (click)="cleanData()"
+                  class="btn btn-danger btn-xs fa fa-times"></button>
+        </p>
+      </td>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td><img src="{{user.img_path}}" width="50px"></td>
+      <td>{{user.username}}</td>
+      <td> ********</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.dateB}}</td>
+      <td>{{user.address}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.gender}}</td>
+      <td>{{user.role}}</td>
+      <td class="">
+        <p data-placement="top" data-toggle="tooltip" title="Edit">
+          <button (click)="editUser(user)"
+                  class="btn btn-primary btn-xs fa fa-edit"></button>
+        </p>
+      </td>
+      <td>
+        <p data-placement="top" data-toggle="tooltip" title="Delete">
+          <button
+            (click)="deleteUser(user._id)"
+            class="btn btn-danger btn-xs fa fa-trash"></button>
+        </p>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
+
 
 <div *ngIf="!admin" class="container-fluid text-center" style="color:white; background-color:red">
   <br/>
