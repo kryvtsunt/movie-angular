@@ -5,7 +5,8 @@
   <i *ngIf="edit" class="btn btn-info float-left fas fa-toggle-on" (click)="toggleEdit()" style="margin-bottom: 10px">
     Edit</i>
   <br/>
-  <div *ngIf="edit">
+
+  <div *ngIf="edit" class="container">
     <input [(ngModel)]="user.username"
            placeholder="username"
            class="form-control"/>
@@ -42,35 +43,23 @@
 
   <div *ngIf="!edit" class="text-center container row">
     <div class="col-md-6 col-lg6">
-      <img src="{{user.img_path}}" alt="Smiley face" width="300px" class="rounded mx-auto d-block" style="border: 2px solid white;"/>
+      <img src="{{user.img_path}}" alt="Smiley face" width="400px" class="rounded img-fluid mx-auto d-block" style="border: 2px solid white;"/>
     </div>
     <div class="col-md-6 col-lg6">
-      <div class="row">
-        <div class="col-6">
+      <div class="container bg-light">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"> <strong>Username: </strong></li>
-          <li class="list-group-item"> <strong>First Name:</strong> </li>
-          <li class="list-group-item"> <strong>Last Name: </strong></li>
-          <li class="list-group-item"> <strong>Email: </strong></li>
-          <li class="list-group-item"> <strong>Phone: </strong></li>
-          <li class="list-group-item"> <strong>Address: </strong></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong> </h3> <h3 class="float-right "><em>{{user.username}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>First Name:</strong> </h3> <h3 class="float-right"><em>{{user.firstName}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Last Name:</strong> </h3> <h3 class="float-right"><em>{{user.lastName}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Email:</strong> </h3> <h3 class="float-right"><em>{{user.email}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Phone:</strong> </h3> <h3 class="float-right"><em>{{user.phone}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Address:</strong> </h3> <h3 class="float-right"><em>{{user.address}}</em></h3></li>
         </ul>
-        </div>
-        <div class="col-6 ">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"> {{user.username}}</li>
-          <li class="list-group-item"> {{user.firstName}}</li>
-          <li class="list-group-item">{{user.lastName}} </li>
-          <li class="list-group-item"> {{user.email}} </li>
-          <li class="list-group-item"> {{user.phone}} </li>
-          <li class="list-group-item">{{user.address}} </li>
-        </ul>
-        </div>
       </div>
     </div>
   </div>
 
-  <div style="margin-top: 10px">
+  <div style="margin-top: 10px" class="container">
     <button *ngIf="!admin" class="btn btn-block btn-secondary" routerLink="">Home</button>
     <button *ngIf="admin" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
     <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
