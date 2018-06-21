@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
   title: string;
   results: Movie[];
-  sch = false;
+  searchBardMode = 0;
   img = 'htitleps://image.tmdb.org/t/p/w500/';
 
   constructor(private searchServie: SearchServiceClient, private route: ActivatedRoute, private userService: UserServiceClient, private router: Router) {
@@ -45,8 +45,9 @@ export class NavbarComponent implements OnInit {
   }
 
   advancedSearch(){
+    this.searchBardMode = 3;
     this.title = '';
-    this.results= null ;
+    this.results = null ;
     this.router.navigate(['search']);
   }
 
@@ -54,6 +55,10 @@ export class NavbarComponent implements OnInit {
     this.title = '';
     this.results = null ;
     this.router.navigate(['../movie/' + id]);
+  }
+
+  changeSearchMode(){
+    this.searchBardMode = (this.searchBardMode + 1) % 2
   }
 
   ngOnInit() {

@@ -17,7 +17,7 @@
   width: 150px;
   height: 150px;
   margin: 0 auto 30px;
-  padding: 50px 30px;
+  padding: 5px 5px;
   border-top-left-radius: 100%;
   border-top-right-radius: 100%;
   border-bottom-left-radius: 100%;
@@ -31,7 +31,7 @@
 
 .form .errors {
   color: white;
-  background: #EF3B3A;
+  background: rgb(85, 85, 181);
 }
 
 .form input {

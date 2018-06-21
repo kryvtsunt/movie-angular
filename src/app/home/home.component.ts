@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.searchServie.searchMovieByTitle(this.title).then((response) => {this.results = response.results} );
   }
   searchPopularMoovies() {
-    this.searchServie.searchPopularMovies().then((response) => {this.results = response.results; this.results.length = 5
+    this.searchServie.searchPopularMovies().then((response) => {this.results = response.results; this.results.length = 8;
     });
   }
 

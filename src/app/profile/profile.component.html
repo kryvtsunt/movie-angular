@@ -65,6 +65,20 @@
     <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   </div>
 
+  <h3>Movies You liked:</h3>
+  <ul class="list-group" *ngFor="let movie of likedMovies">
+    <li class="list-group-item">
+      {{movie.title}}
+    </li>
+  </ul>
+
+  <h3>Movies You bookmarked:</h3>
+  <ul class="list-group" *ngFor="let movie of likedMovies">
+    <li class="list-group-item">
+      {{movie.title}}
+    </li>
+  </ul>
+
 </div>
 
 

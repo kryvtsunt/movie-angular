@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../models/user.model.client';
 import {UserServiceClient} from '../services/user.service.client';
 import {Router} from '@angular/router';
+import {LikeServiceClient} from "../services/like.service.client";
+import {BookmarkServiceClient} from "../services/bookmark.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -10,12 +12,15 @@ import {Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private router: Router, private service: UserServiceClient) {
+  constructor(private router: Router, private service: UserServiceClient,  private likeService: LikeServiceClient,
+              private bookmarkService: BookmarkServiceClient) {
   }
 
   user: User = new User();
   edit: boolean;
   admin = false;
+  likedMovies;
+  bookmarkedMovies;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -37,6 +42,21 @@ export class ProfileComponent implements OnInit {
       .then(() =>
         this.router.navigate(['home']));
   }
+  findAllLikedMovies(){
+    this.likeService.findAllLikedMovies()
+      .then((response){
+      console.log(response)
+      this.likedMovies = response;
+    });
+  }
+
+  findAllBookmarkedMovies(){
+    this.bookmarkService.findAllBookmarkedMovies()
+      .then((response){
+      console.log(response)
+      this.bookmarkedMovies = response;
+    });
+  }
 
   ngOnInit() {
     this.edit = false;
@@ -47,6 +67,8 @@ export class ProfileComponent implements OnInit {
         if (user.role === 'admin') {
           this.admin = true;
         }
+        this.findAllLikedMovies();
+        this.findAllBookmarkedMovies();
       });
 
   }

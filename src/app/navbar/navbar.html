@@ -20,7 +20,7 @@
         <!--</li>-->
       </ul>
       <div class="mx-2 my-auto d-inline w-100">
-        <div class="input-group" *ngIf="!sch">
+        <div class="input-group" *ngIf="searchBardMode===0">
           <input type="text" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control border border-right-0"
                  placeholder="Press the button to go to Advanced Search --> ">
           <span class="input-group-append">
@@ -34,11 +34,8 @@
 
 
       <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="sch === true">
-          <i class="btn fas fa-search-minus fa-lg" (click)="sch= !sch"></i>
-        </li>
-        <li class="nav-item" *ngIf="sch === false">
-          <i class="btn fas fa-search-plus fa-lg" (click)="sch= !sch"></i>
+        <li class="nav-item">
+          <i class="btn fas fa-search-plus fa-lg" (click)="this.changeSearchMode()"></i>
         </li>
       </ul>
       <ul class="navbar-nav" *ngIf="!loggedIn">
@@ -47,7 +44,7 @@
           <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-cog fa-lg"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-right text-center" style="margin-top: 15px" >
             <button class="dropdown-item" routerLink="./login" routerLinkActive="active"><i
               class="fas fa-sign-in-alt"></i> Sign In
             </button>
@@ -62,7 +59,7 @@
           <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user-circle fa-2x"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-right text-center" style="margin-top: 10px">
             <button class="dropdown-item" routerLink="./profile" routerLinkActive="active"><i class="fas fa-user"></i>
               Profile
             </button>
@@ -75,7 +72,7 @@
     </div>
   </nav>
 
-  <div class="" *ngIf="sch">
+  <div class="" *ngIf="searchBardMode===1">
   <div class="input-group container-fluid" style="padding: 0px 15px">
     <input type="text" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control border border-right-0"
            placeholder="Press the button to go to Advanced Search --> ">

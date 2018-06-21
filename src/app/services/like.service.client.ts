@@ -37,4 +37,12 @@ export class LikeServiceClient {
     })
       .then (response => response.json());
   }
+
+  findAllLikedMovies(userId) {
+    return fetch('http://localhost:4000/api/like/movie/', {
+      credentials: 'include', // include, same-origin, *omit
+      method: 'get',
+    })
+      .then (response => response.json());
+  }
 }
