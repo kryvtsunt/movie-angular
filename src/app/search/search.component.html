@@ -1,4 +1,4 @@
-<div>
+<div class="">
   <h1> Advanced Search</h1>
   <p> Use this app to browse new releases and find your favourite movies </p>
   <form>
@@ -14,7 +14,7 @@
   <div *ngIf="results">
 
     <div *ngFor="let res of results">
-      <div class="list-group-item" style="margin: 10px; border: 1px white solid">
+      <div class="list-group-item list-group-item-action " style="margin: 10px; border: 1px white solid" routerLink="../movie/{{res.id}}">{{res.title}>
         <div class="row">
           <div class="col-md-9">
 

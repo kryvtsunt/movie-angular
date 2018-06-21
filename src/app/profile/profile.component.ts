@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   logout() {
     this.service.logout()
       .then(() =>
-        this.router.navigate(['tk/home']));
+        this.router.navigate(['home']));
   }
 
   ngOnInit() {

@@ -8,49 +8,103 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" routerLink="./home" routerLinkActive="active"> Home </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="./search" routerLinkActive="active"> Search </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="./about" routerLinkActive="active"> About </a>
         </li>
         <!--<li class="nav-item">-->
-        <!--<a class="nav-link disabled" href="#">Disabled</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item dropdown">-->
-        <!--<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
-        <!--<div class="dropdown-menu" aria-labelledby="dropdown01">-->
-        <!--<a class="dropdown-item" href="#">Action</a>-->
-        <!--<a class="dropdown-item" href="#">Another action</a>-->
-        <!--<a class="dropdown-item" href="#">Something else here</a>-->
-        <!--</div>-->
+          <!--<a class="nav-link" routerLink="./search" routerLinkActive="active"> Search </a>-->
         <!--</li>-->
       </ul>
-      <ul class="navbar-nav my-2 my-lg-0">
+      <div class="mx-2 my-auto d-inline w-100">
+        <div class="input-group" *ngIf="!sch">
+          <input type="text" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control border border-right-0"
+                 placeholder="Press the button to go to Advanced Search --> ">
+          <span class="input-group-append">
+                <button class="btn btn-light border border-left-0" (click)="advancedSearch()"
+                        type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </div>
 
-        <li *ngIf="!loggedIn" class="nav-item">
-          <a class="nav-link" routerLink="./login" routerLinkActive="active"> Sign In </a>
+
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="sch === true">
+          <i class="btn fas fa-search-minus fa-lg" (click)="sch= !sch"></i>
         </li>
-        <li *ngIf="!loggedIn" class="nav-link disabled"> | </li>
-        <li *ngIf="!loggedIn" class="nav-item">
-          <a class="nav-link" routerLink="./register" routerLinkActive="active"> Sign Up </a>
-        </li>
-        <li *ngIf="loggedIn" class="nav-item">
-          <a class="nav-link" routerLink="./profile" routerLinkActive="active"> Profile </a>
-        </li>
-        <li *ngIf="loggedIn" class="nav-item">
-          <button class="btn bg-transparent nav-link" (click)="logout()"> Log Out </button>
+        <li class="nav-item" *ngIf="sch === false">
+          <i class="btn fas fa-search-plus fa-lg" (click)="sch= !sch"></i>
         </li>
       </ul>
-      <!--<form class="form-inline my-2 my-lg-0">-->
-      <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-      <!--</form>-->
+      <ul class="navbar-nav" *ngIf="!loggedIn">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdownMenuLink">
+            <button class="dropdown-item" routerLink="./login" routerLinkActive="active"><i
+              class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+            <button class="dropdown-item" routerLink="./register" routerLinkActive="active"><i
+              class="fas fa-user-plus"></i> Sign Up
+            </button>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav" *ngIf="loggedIn">
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle fa-2x"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdownMenuLink">
+            <button class="dropdown-item" routerLink="./profile" routerLinkActive="active"><i class="fas fa-user"></i>
+              Profile
+            </button>
+            <button class="dropdown-item" (click)="logout()"><i class="fas fa-door-open"></i> Sign Out</button>
+          </div>
+        </li>
+      </ul>
+
+
     </div>
   </nav>
 
+  <div class="" *ngIf="sch">
+  <div class="input-group container-fluid" style="padding: 0px 15px">
+    <input type="text" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control border border-right-0"
+           placeholder="Press the button to go to Advanced Search --> ">
+    <span class="input-group-append">
+                <button class="btn btn-light border border-left-0" (click)="advancedSearch()"
+                        type="button">
+                    <i class="fa fa-search "></i>
+                </button>
+              </span>
+  </div>
+  </div>
+
+
+  <div *ngIf="results" class="">
+    <div class="container-fluid">
+        <ul *ngFor="let res of results" class="list-group list-group-dark">
+          <!--<div class="list-group" style="margin: 2px" >-->
+          <li style="padding: 10px" class="list-group-item list-group-item-light list-group-item-action" (click)="navigateMovie(res.id)">
+
+            {{res.title}}
+            <!--<img src="{{img}}{{res.poster_path}}" width="100">-->
+            <!--<p> {{res.overview.substring(0, 250)+'...' }} </p>-->
+            <!--<div>-->
+            <!--<strong>Genres: </strong>-->
+            <!--<span>Genre</span>-->
+            <!--</div>-->
+          </li>
+        </ul>
+      <br/>
+    </div>
+  </div>
 </div>
