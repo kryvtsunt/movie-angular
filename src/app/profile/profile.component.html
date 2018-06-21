@@ -6,54 +6,146 @@
     Edit</i>
   <br/>
 
+  <div *ngIf="edit" class="text-center container row">
+
+    <div class="col-md-6 col-lg6">
+      <div class="row">
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+        <div class="card col-3 btn btn-light">
+          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
+          <p class="card-text">Boy</p>
+        </div>
+      </div>
+
+      <!--<img src="{{user.img_path}}" alt="Smiley face" width="100px"-->
+      <!--class="btn btn-outline-dark active rounded " style="border: 2px solid black"/>-->
+      <!--<img src="{{user.img_path}}" alt="Smiley face" width="100px"-->
+      <!--class="btn btn-outline-dark active rounded img-fluid mx-auto d-block" style="border: 2px solid black"/>-->
+      <!--<img src="{{user.img_path}}" alt="Smiley face" width="100px"-->
+      <!--class="btn btn-outline-dark active rounded img-fluid mx-auto d-block" style="border: 2px solid black"/>-->
+      <!--<img src="{{user.img_path}}" alt="Smiley face" width="100px"-->
+      <!--class="btn btn-outline-dark active rounded img-fluid mx-auto d-block" style="border: 2px solid black"/>-->
+      <!--<img src="{{user.img_path}}" alt="Smiley face" width="100px"-->
+      <!--class="btn btn-outline-dark active rounded img-fluid mx-auto d-block" style="border: 2px solid black"/>-->
+      <br/>
+      <label class=""><strong>Custom Image Path:</strong></label>
+      <input [(ngModel)]="user.img_path"
+             placeholder="Image url"
+             class="form-control"/>
+    </div>
+    <div class="col-md-6 col-lg6">
+      <div class="container bg-light">
+        <ul class="list-group list-group-flush">
+          <!--<li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong> </h3> <div class="float-right ">-->
+          <!--<input [(ngModel)]="user.username"-->
+          <!--placeholder="username"-->
+          <!--class="form-control"/>-->
+          <!--</div></li>-->
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong></h3>
+            <div class="float-right ">
+              <input [(ngModel)]="user.password"
+                     type="password"
+                     placeholder="username"
+                     class="form-control"/>
+            </div>
+          </li>
+
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>First Name:</strong></h3>
+            <div class="float-right">
+              <input [(ngModel)]="user.firstName"
+                     placeholder="first name"
+                     class="form-control"/>
+            </div>
+          </li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Last Name:</strong></h3>
+            <div class="float-right">
+              <input [(ngModel)]="user.lastName"
+                     placeholder="last name"
+                     class="form-control"/>
+            </div>
+          </li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Email:</strong></h3>
+            <div class="float-right">
+              <input [(ngModel)]="user.email"
+                     placeholder="email"
+                     class="form-control"/>
+            </div>
+          </li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Phone:</strong></h3>
+            <div class="float-right">
+              <input [(ngModel)]="user.phone"
+                     placeholder="Phone"
+                     class="form-control"/>
+            </div>
+          </li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Address:</strong></h3>
+            <div class="float-right">
+              <input [(ngModel)]="user.address"
+                     placeholder="Address"
+                     class="form-control"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
   <div *ngIf="edit" class="container">
-    <input [(ngModel)]="user.username"
-           placeholder="username"
-           class="form-control"/>
-    <input [(ngModel)]="user.password"
-           placeholder="password"
-           class="form-control"
-           type="password"/>
-    <input [(ngModel)]="user.firstName"
-           placeholder="first name"
-           class="form-control"/>
-    <input [(ngModel)]="user.lastName"
-           placeholder="last name"
-           class="form-control"/>
-    <input [(ngModel)]="user.email"
-           placeholder="email"
-           class="form-control"/>
-    <input [(ngModel)]="user.phone"
-           placeholder="Phone"
-           class="form-control"/>
-    <input [(ngModel)]="user.address"
-           placeholder="Address"
-           class="form-control"/>
-    <input [(ngModel)]="user.img_path"
-           placeholder="Image url"
-           class="form-control"/>
     <button (click)="update(user)"
             class="btn btn-primary btn-block "
             style="margin-top: 10px">
-
-
       Update
     </button>
   </div>
 
   <div *ngIf="!edit" class="text-center container row">
     <div class="col-md-6 col-lg6">
-      <img src="{{user.img_path}}" alt="Smiley face" width="400px" class="rounded img-fluid mx-auto d-block" style="border: 2px solid white;"/>
+      <img src="{{user.img_path}}" alt="Smiley face" width="400px" class="rounded img-fluid mx-auto d-block"
+           style="border: 2px solid white;"/>
     </div>
     <div class="col-md-6 col-lg6">
       <div class="container bg-light">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong> </h3> <h3 class="float-right "><em>{{user.username}}</em></h3></li>
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>First Name:</strong> </h3> <h3 class="float-right"><em>{{user.firstName}}</em></h3></li>
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Last Name:</strong> </h3> <h3 class="float-right"><em>{{user.lastName}}</em></h3></li>
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Email:</strong> </h3> <h3 class="float-right"><em>{{user.email}}</em></h3></li>
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Phone:</strong> </h3> <h3 class="float-right"><em>{{user.phone}}</em></h3></li>
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Address:</strong> </h3> <h3 class="float-right"><em>{{user.address}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong></h3>
+            <h3 class="float-right "><em>{{user.username}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>First Name:</strong></h3>
+            <h3 class="float-right"><em>{{user.firstName}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Last Name:</strong></h3>
+            <h3 class="float-right"><em>{{user.lastName}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Email:</strong></h3>
+            <h3 class="float-right"><em>{{user.email}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Phone:</strong></h3>
+            <h3 class="float-right"><em>{{user.phone}}</em></h3></li>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Address:</strong></h3>
+            <h3 class="float-right"><em>{{user.address}}</em></h3></li>
         </ul>
       </div>
     </div>
@@ -73,7 +165,7 @@
   </ul>
 
   <h3>Movies You bookmarked:</h3>
-  <ul class="list-group" *ngFor="let movie of likedMovies">
+  <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
     <li class="list-group-item">
       {{movie.title}}
     </li>

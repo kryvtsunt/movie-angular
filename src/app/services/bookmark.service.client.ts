@@ -37,8 +37,7 @@ export class BookmarkServiceClient {
   }
 
   findAllBookmarkedMovies(userId) {
-    return fetch('http://localhost:4000/api/like/movie/', {
-      credentials: 'include', // include, same-origin, *omit
+    return fetch('http://localhost:4000/api/bookmark/user/' + userId + '/movie/', {
       method: 'get',
     })
       .then (response => response.json());

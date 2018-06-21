@@ -25,9 +25,10 @@ export class AdminComponent implements OnInit {
   boyImg2 = 'http://webiconspng.com/wp-content/uploads/2016/11/avatar_business_costume_male_man_office_user_icon_403022.png'
   girlImg = 'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-girl-flat.png'
   girlImg2 = 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/girl-512.png'
-  dinoImg = 'http://www.imgworlds.com/wp-content/themes/IMG/img/phase3/welcome/trex.png'
   manImg = 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-512.png'
   womanImg = 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png'
+  oldmanImg = 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman2-512.png'
+  oldwomanImg = 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/maturewoman-3-512.png'
 
   createUser() {
     console.log(this.user)

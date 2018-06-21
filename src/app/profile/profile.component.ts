@@ -43,15 +43,15 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['home']));
   }
   findAllLikedMovies(){
-    this.likeService.findAllLikedMovies()
+    this.likeService.findAllLikedMovies(this.user._id)
       .then((response){
-      console.log(response)
+      // console.log(response)
       this.likedMovies = response;
     });
   }
 
   findAllBookmarkedMovies(){
-    this.bookmarkService.findAllBookmarkedMovies()
+    this.bookmarkService.findAllBookmarkedMovies(this.user._id)
       .then((response){
       console.log(response)
       this.bookmarkedMovies = response;
