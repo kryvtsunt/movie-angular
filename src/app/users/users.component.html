@@ -6,7 +6,7 @@
 <div class="container-fluid text-center">
   <br/>
   <h4>List of Users</h4>
-  <table class="table table-responsive table-bordred table-striped" [ngClass]="{'usertable': !admin}">
+  <table class="table table-responsive table-hover table-bordred table-striped" [ngClass]="{'usertable': !admin}">
     <thead>
     <th>Image</th>
     <th>Username</th>
@@ -107,11 +107,10 @@
         </p>
       </td>
     </tr>
-    <tr *ngFor="let user of users" >
-      <td *ngIf="admin" routerLink="../../user/{{user.username}}" class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
-      <td *ngIf="!admin" routerLink="../user/{{user.username}}" class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
-      <td *ngIf="admin" routerLink="../../user/{{user.username}}">{{user.username}}</td>
-      <td *ngIf="!admin" routerLink="../../user/{{user.username}}">{{user.username}}</td>
+    <tr *ngFor="let user of users" routerLink= {{routerLink}}{{user.username}}>
+      <td *ngIf="admin" routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
+      <td *ngIf="!admin" routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
+      <td>{{user.username}}</td>
       <td *ngIf="admin"> ********</td>
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>

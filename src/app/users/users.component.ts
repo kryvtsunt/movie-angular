@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
   }
 
   users = [];
+  routerLink: string
   user: User;
   editMode = false;
   sections = [];
@@ -90,8 +91,10 @@ export class UsersComponent implements OnInit {
       .then(user => {
         if (user.role === 'admin') {
           this.admin = true;
+          this.routerLink = '../../user/';
         } else {
           this.admin = false;
+          this.routerLink = '/../user/';
         }
       });
     this.findAllUsers();

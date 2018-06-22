@@ -86,7 +86,7 @@ export class MovieComponent implements OnInit {
   }
 
   countLikes() {
-    this.movieService.getMovie(this.movie.id).then((ls) => {
+    this.movieService.findMovie(this.movie.id).then((ls) => {
       const movie = ls.movie;
       if (movie === null) {
         this.numberOfLikes = 0;
