@@ -23,6 +23,7 @@ import {LikeServiceClient} from "./services/like.service.client";
 import {MovieServiceClient} from "./services/movie.service.client";
 import {BookmarkServiceClient} from "./services/bookmark.service.client";
 import {UsersComponent} from "./users/users.component";
+import {MoviesComponent} from "./movies/movies.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {UsersComponent} from "./users/users.component";
     RegisterComponent,
     ProfileComponent,
     AdminComponent,
-    UsersComponent
+    UsersComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,

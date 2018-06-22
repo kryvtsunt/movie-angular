@@ -159,22 +159,23 @@
     <button *ngIf="admin && profile" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
     <button *ngIf="profile" class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   </div>
-
+  <br/>
   <div>
     <h3 *ngIf="profile">Movies You liked:</h3>
     <h3 *ngIf="!profile">Movies this User liked:</h3>
     <ul class="list-group" *ngFor="let movie of likedMovies">
-      <li class="list-group-item">
-        {{movie.title}}
+      <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
+        <h5>{{movie.movie.title}}</h5>
       </li>
     </ul>
   </div>
+  <br/>
 
   <div *ngIf="profile">
     <h3>Movies You bookmarked:</h3>
     <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
-      <li class="list-group-item">
-        {{movie.title}}
+      <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
+        <h5>{{movie.movie.title}}</h5>
       </li>
     </ul>
   </div>

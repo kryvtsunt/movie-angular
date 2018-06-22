@@ -1,6 +1,7 @@
 export class Movie{
-  id: String
-  title: String
-  poster_path: String
-  overview: String
+  _id: string
+  id: string
+  title: string
+  poster_path: string
+  overview: string
 }

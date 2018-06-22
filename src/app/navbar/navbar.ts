@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserServiceClient} from '../services/user.service.client';
-import {SearchServiceClient} from "../services/search.service.client";
-import {Movie} from "../models/movie.model.client";
+import {SearchServiceClient} from '../services/search.service.client';
+import {Movie} from '../models/movie.model.client';
 
 @Component({
   selector: 'app-navbar',
@@ -27,9 +27,9 @@ export class NavbarComponent implements OnInit {
   }
 
   search() {
-    console.log(this.title[0])
-    if (this.title.length > 0 && this.title[0] !== '@') {
-      this.results = []
+    console.log(this.title[0]);
+    if (this.title.length >= 0 && this.title[0] !== '@') {
+      this.results = [];
       this.searchServie.searchMovieByTitle(this.title).then((response) => {
         this.results = response.results;
         if (this.results.length > 5) {
@@ -50,11 +50,15 @@ export class NavbarComponent implements OnInit {
   }
 
   advancedSearch() {
-    this.searchBardMode = 3;
     if (this.title.length > 0 && this.title[0] === '@') {
-      this.router.navigate(['../user/' + this.title.substr(1)] )
-      this.title = '';
+      const username = this.title.substr(1);
+      this.userService.findUserByUsername(username)
+        .then((user) => {if (user !== null) {
+          this.router.navigate(['../user/' +  username]);
+          this.title = '';
+      }});
     } else {
+      this.searchBardMode = 3;
       this.title = '';
       this.results = null;
       this.router.navigate(['search']);
@@ -68,7 +72,7 @@ export class NavbarComponent implements OnInit {
   }
 
   changeSearchMode() {
-    this.searchBardMode = (this.searchBardMode + 1) % 2
+    this.searchBardMode = (this.searchBardMode + 1) % 2;
   }
 
   ngOnInit() {

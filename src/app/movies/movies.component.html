@@ -1,0 +1,33 @@
+<!--<div class="sidenav">-->
+<!--<i class=" fa fa-2x fa-users"></i>-->
+<!--<i class=" fa fa-2x fa-user"></i>-->
+<!--<i class=" fa fa-2x fa-edit"></i>-->
+<!--</div>-->
+<div class="container-fluid">
+  <br/>
+  <h4>List of Movies</h4>
+  <div class="card-deck">
+    <div *ngFor="let movie of movies">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <div *ngIf="movie.poster_path !== null">
+            <img class="card-img" src="{{img}}{{movie.poster_path}}">
+          </div>
+          <div *ngIf="movie.poster_path === null">
+            <img class="card-img" src="http://a-movies.info/public/img/no_poster.jpg">
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            {{movie.title}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -14,4 +14,11 @@ export class MovieServiceClient {
           return response.json();
       });
   }
+
+  findAllMovies() {
+    return fetch('http://localhost:4000/api/movie/')
+      .then(response => {
+        return response.json();
+      });
+  }
 }
