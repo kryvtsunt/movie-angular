@@ -9,18 +9,24 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AdminComponent} from "./admin/admin.component";
+import {UsersComponent} from "./users/users.component";
 
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'admin', component: AdminComponent},
+  {path: 'admin', component: AdminComponent, children: [
+    {path: '', redirectTo: 'users', pathMatch: 'full'},
+    {path: 'users', component: UsersComponent}
+  ]},
   // {path: 'tk', component: NavbarComponent}
   // {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'search', component: SearchComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'user/:username', component: ProfileComponent},
   {path: 'movie/:id', component: MovieComponent},
+  {path: 'users', component: UsersComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'test', component: OmdbTestComponent}

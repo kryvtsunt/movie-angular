@@ -26,12 +26,17 @@ export class NavbarComponent implements OnInit {
   setParams(params) {
   }
 
-  searchMoovie() {
-    console.log(this.title);
-    this.searchServie.searchMovieByTitle(this.title).then((response) => {
-      this.results = response.results;
-      if (this.results.length > 5) {this.results.length = 5;}
-    });
+  search() {
+    console.log(this.title[0])
+    if (this.title.length > 0 && this.title[0] !== '@') {
+      this.results = []
+      this.searchServie.searchMovieByTitle(this.title).then((response) => {
+        this.results = response.results;
+        if (this.results.length > 5) {
+          this.results.length = 5;
+        }
+      });
+    }
   }
 
   checkStatus() {
@@ -44,20 +49,25 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['tk/home']));
   }
 
-  advancedSearch(){
+  advancedSearch() {
     this.searchBardMode = 3;
-    this.title = '';
-    this.results = null ;
-    this.router.navigate(['search']);
+    if (this.title.length > 0 && this.title[0] === '@') {
+      this.router.navigate(['../user/' + this.title.substr(1)] )
+      this.title = '';
+    } else {
+      this.title = '';
+      this.results = null;
+      this.router.navigate(['search']);
+    }
   }
 
-  navigateMovie(id){
+  navigateMovie(id) {
     this.title = '';
-    this.results = null ;
+    this.results = null;
     this.router.navigate(['../movie/' + id]);
   }
 
-  changeSearchMode(){
+  changeSearchMode() {
     this.searchBardMode = (this.searchBardMode + 1) % 2
   }
 

@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Profile</h1>
-  <i *ngIf="!edit" class="btn btn-info float-left fas fa-toggle-off" (click)="toggleEdit()" style="margin-bottom: 10px">
+  <i *ngIf="!edit && profile" class="btn btn-info float-left fas fa-toggle-off" (click)="toggleEdit()"
+     style="margin-bottom: 10px">
     Edit</i>
   <i *ngIf="edit" class="btn btn-info float-left fas fa-toggle-on" (click)="toggleEdit()" style="margin-bottom: 10px">
     Edit</i>
@@ -10,37 +11,37 @@
 
     <div class="col-md-6 col-lg6">
       <div class="row">
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg}"(click)="user.img_path = boyImg">
+          <img class="card-img" src="{{boyImg}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong> BOY </strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg}"(click)="user.img_path = girlImg">
+          <img class="card-img" src="{{girlImg}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>GIRL</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg2}"(click)="user.img_path = boyImg2">
+          <img class="card-img" src="{{boyImg2}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>TEEN BOY</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg2}"(click)="user.img_path = girlImg2">
+          <img class="card-img" src="{{girlImg2}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>TEEN GIRL</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === manImg}"(click)="user.img_path = manImg">
+          <img class="card-img" src="{{manImg}}" alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>MAN</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === womanImg}"(click)="user.img_path = womanImg">
+          <img class="card-img" src="{{womanImg}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>WOMAN</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldmanImg}"(click)="user.img_path = oldmanImg">
+          <img class="card-img" src="{{oldmanImg}}" alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>OLD MAN</strong></p>
         </div>
-        <div class="card col-3 btn btn-light">
-          <img class="card-img" src="{{user.img_path}}" alt="Smiley face" width="20px"/>
-          <p class="card-text">Boy</p>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldwomanImg}"(click)="user.img_path = oldwomanImg">
+          <img class="card-img" src="{{oldwomanImg}}"  alt="Smiley face" width="20px"/>
+          <p class="card-text"><strong>OLD WOMAN</strong></p>
         </div>
       </div>
 
@@ -152,24 +153,30 @@
   </div>
 
   <div style="margin-top: 10px" class="container">
-    <button *ngIf="!admin" class="btn btn-block btn-secondary" routerLink="">Home</button>
-    <button *ngIf="admin" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
-    <button class="btn btn-block btn-danger" (click)="logout()">Logout</button>
+    <button *ngIf="!profile" class="btn btn-block btn-primary" routerLink="">Follow</button>
+    <button *ngIf="!admin && profile" class="btn btn-block btn-secondary" routerLink="">Home</button>
+    <button *ngIf="admin && profile" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
+    <button *ngIf="profile" class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   </div>
 
-  <h3>Movies You liked:</h3>
-  <ul class="list-group" *ngFor="let movie of likedMovies">
-    <li class="list-group-item">
-      {{movie.title}}
-    </li>
-  </ul>
+  <div>
+    <h3 *ngIf="profile">Movies You liked:</h3>
+    <h3 *ngIf="!profile">Movies this User liked:</h3>
+    <ul class="list-group" *ngFor="let movie of likedMovies">
+      <li class="list-group-item">
+        {{movie.title}}
+      </li>
+    </ul>
+  </div>
 
-  <h3>Movies You bookmarked:</h3>
-  <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
-    <li class="list-group-item">
-      {{movie.title}}
-    </li>
-  </ul>
+  <div *ngIf="profile">
+    <h3>Movies You bookmarked:</h3>
+    <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
+      <li class="list-group-item">
+        {{movie.title}}
+      </li>
+    </ul>
+  </div>
 
 </div>
 
