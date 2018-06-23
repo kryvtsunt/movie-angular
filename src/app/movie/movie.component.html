@@ -1,6 +1,7 @@
 <div class="container container-fluid" *ngIf="movie">
   <header>
-    <img src="{{img}}{{movie.poster_path}}">
+    <img *ngIf="!local" src="{{img}}{{movie.poster_path}}">
+    <img *ngIf="local" src="{{movie.poster_path}}">
     <h1>
       {{movie.title}}
     </h1>

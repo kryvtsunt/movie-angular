@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceClient} from '../services/user.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../models/user.model.client';
 import {isNullOrUndefined} from "util";
 
@@ -12,14 +12,14 @@ import {isNullOrUndefined} from "util";
 export class UsersComponent implements OnInit {
 
   constructor(private userService: UserServiceClient,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   users = [];
   routerLink: string
   user: User;
   editMode = false;
-  sections = [];
+  listMode;
   admin: boolean;
   index;
   boyImg = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100'
@@ -83,18 +83,25 @@ export class UsersComponent implements OnInit {
         console.log(users)
       });
   }
-
+  switchMode(){
+    this.listMode = !this.listMode;
+  }
   ngOnInit() {
+    if (this.router.url === '/users') {
+      this.listMode = false
+      this.routerLink = '/../user/';
+    } else {
+      this.listMode = true
+      this.routerLink = '../../user/';
+    }
     this.user = new User();
     this.userService
       .profile()
       .then(user => {
         if (user.role === 'admin') {
           this.admin = true;
-          this.routerLink = '../../user/';
         } else {
           this.admin = false;
-          this.routerLink = '/../user/';
         }
       });
     this.findAllUsers();

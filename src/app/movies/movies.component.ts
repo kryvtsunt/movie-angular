@@ -23,26 +23,25 @@ export class MoviesComponent implements OnInit {
   index;
 
 
-  // updateMovie() {
-  //   this.movieService.updateMovie(this.movie._id, this.movie)
-  //     .then(() => {
-  //       this.findAllMovies();
-  //       this.cleanData();
-  //     });
-  // }
-  //
-  // deleteMovie(movieId) {
-  //   this.movieService.deleteMovie(movieId)
-  //     .then(() => {
-  //       this.findAllMovies();
-  //       this.cleanData();
-  //     });
-  // }
-  //
-  // cleanData() {
-  //   this.movie = new movie();
-  //   this.editMode = false;
-  // }
+  updateMovie() {
+    this.movieService.updateMovie(this.movie._id, this.movie)
+      .then(() => {
+        this.findAllMovies();
+        this.cleanData();
+      });
+  }
+
+  deleteMovie(movieId) {
+    this.movieService.deleteMovie(movieId)
+      .then(() => {
+        this.findAllMovies();
+        this.cleanData();
+      });
+  }
+
+  cleanData() {
+    this.movie = new Movie();
+  }
 
   editMovie(mov) {
     this.movie = Object.assign({}, mov);

@@ -13,7 +13,7 @@ import {Movie} from '../models/movie.model.client';
 export class NavbarComponent implements OnInit {
 
   loggedIn: boolean;
-  title: string;
+  title = '';
   results: Movie[];
   searchBardMode = 0;
   img = 'htitleps://image.tmdb.org/t/p/w500/';

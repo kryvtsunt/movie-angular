@@ -160,7 +160,8 @@
     <button *ngIf="profile" class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   </div>
   <br/>
-  <div>
+
+  <div *ngIf="likedMovies.length > 0">
     <h3 *ngIf="profile">Movies You liked:</h3>
     <h3 *ngIf="!profile">Movies this User liked:</h3>
     <ul class="list-group" *ngFor="let movie of likedMovies">
@@ -171,8 +172,9 @@
   </div>
   <br/>
 
-  <div *ngIf="profile">
-    <h3>Movies You bookmarked:</h3>
+  <div *ngIf="bookmarkedMovies.length > 0">
+    <h3 *ngIf="profile">Movies You bookmarked:</h3>
+    <h3 *ngIf="!profile">Movies this User bookmarked:</h3>
     <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
       <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
         <h5>{{movie.movie.title}}</h5>

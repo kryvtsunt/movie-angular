@@ -9,5 +9,5 @@ export class ActivityServiceClient {
         return response.json();
       });
   }
-  
+
 }

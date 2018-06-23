@@ -5,8 +5,9 @@
 <!--</div>-->
 <div class="container-fluid text-center">
   <br/>
-  <h4>List of Users</h4>
-  <table class="table table-hover table-bordred table-striped" [ngClass]="{'usertable': !admin}">
+  <button class="float-right btn btn-light fa-lg fa fa-th-list" (click)="switchMode()"></button>
+  <h3><strong>All Users</strong></h3>
+  <table class="table table-hover table-bordred table-striped" *ngIf="listMode">
     <thead class="thead-dark">
     <th>Image</th>
     <th>Username</th>
@@ -119,25 +120,25 @@
       <td>{{user.phone}}</td>
       <td>{{user.gender}}</td>
       <td>{{user.role}}</td>
-      <td class="">
+      <td *ngIf="admin">
         <p data-placement="top" data-toggle="tooltip" title="Edit">
           <button *ngIf="admin" (click)="editUser(user)"
                   class="btn btn-primary btn-xs fa fa-edit"></button>
         </p>
       </td>
-      <td>
+      <td *ngIf="admin">
         <p data-placement="top" data-toggle="tooltip" title="Delete">
           <button *ngIf="admin"
             (click)="deleteUser(user._id)"
             class="btn btn-danger btn-xs fa fa-trash"></button>
         </p>
-      </td>
+      </td >
     </tr>
     </tbody>
   </table>
 
 
-  <div class="card-deck d-flex justify-content-center" >
+  <div class="card-deck d-flex justify-content-center" *ngIf="!listMode">
     <div *ngFor="let user of users">
     <div class="card btn shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px" routerLink= {{routerLink}}{{user.username}}>
       <img class="card-img-top img-fluid bg-primary" src="{{user.img_path}}" alt="Card image">
@@ -151,6 +152,7 @@
     </div>
     </div>
   </div>
+
 </div>
 
 

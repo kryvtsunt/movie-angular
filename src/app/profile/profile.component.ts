@@ -73,8 +73,8 @@ export class ProfileComponent implements OnInit {
     this.edit = false;
     this.route.params.subscribe(
       params => {
-        this.profile = true;
         if (params.username === undefined) {
+          this.profile = true;
           this.service
             .profile()
             .then(user => {
@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
             });
 
         } else {
-          this.profile = false;
+          // this.profile = false;
           this.service.findUserByUsername(params.username)
             .then(user => {
               this.user = user;

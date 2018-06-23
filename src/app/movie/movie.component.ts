@@ -24,11 +24,13 @@ export class MovieComponent implements OnInit {
   liked: boolean;
   bookmarked: boolean;
   numberOfLikes: number;
+  local: boolean
 
   constructor(private bookmarkService: BookmarkServiceClient, private likeService: LikeServiceClient,
               private movieService: MovieServiceClient, private reviewService: ReviewServiceClient,
               private userService: UserServiceClient, private searchService: SearchServiceClient,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+  }
 
   checkStatus() {
     this.userService.checkStatus().then(response => {
@@ -57,6 +59,7 @@ export class MovieComponent implements OnInit {
         this.countLikes();
       });
   }
+
   checkBookmark() {
     this.bookmarkService.checkBookmark(this.movie.id).then((response) => {
       this.bookmarked = response;
@@ -81,13 +84,12 @@ export class MovieComponent implements OnInit {
     this.reviewService.findAllReviews(this.movie.id)
       .then((result) => {
         this.reviews = result
-        console.log(this.reviews);
+        // console.log(this.reviews);
       });
   }
 
   countLikes() {
-    this.movieService.findMovie(this.movie.id).then((ls) => {
-      const movie = ls.movie;
+    this.movieService.findMovie(this.movie.id).then((movie) => {
       if (movie === null) {
         this.numberOfLikes = 0;
       } else {
@@ -98,26 +100,39 @@ export class MovieComponent implements OnInit {
 
   addReview() {
     this.reviewService.addReview(this.movie.id, this.review, this.movie)
-      .then((response) => {
+      .then(() => {
         this.findAllReviews();
       });
   }
 
-
+  setup() {
+    this.checkStatus();
+    this.checkLike();
+    this.checkBookmark();
+    this.countLikes();
+    this.findAllReviews();
+  }
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.searchService.searchMoovieById(params.id)
+        this.movieService.findMovie(params.id)
           .then(movie => {
-            this.movie = movie;
-          })
-          .then(() => {
-            {
-              this.checkStatus();
-              this.checkLike();
-              this.checkBookmark();
-              this.countLikes();
-              this.findAllReviews();
+            if (movie === null) {
+              this.searchService.searchMoovieById(params.id)
+                .then(mov => {
+                  this.local = false;
+                  this.movie = mov;
+                  console.log(this.movie);
+                })
+                .then(() => {
+                  {
+                    this.setup();
+                  }
+                });
+            } else {
+              this.local = true;
+              this.movie = movie;
+              this.setup()
             }
           });
       });
