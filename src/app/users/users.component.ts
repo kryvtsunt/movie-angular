@@ -3,6 +3,7 @@ import {UserServiceClient} from '../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../models/user.model.client';
 import {isNullOrUndefined} from "util";
+import {FollowServiceClient} from "../services/follow.service.client";
 
 @Component({
   selector: 'app-users',
@@ -12,6 +13,7 @@ import {isNullOrUndefined} from "util";
 export class UsersComponent implements OnInit {
 
   constructor(private userService: UserServiceClient,
+              private followService: FollowServiceClient,
               private route: ActivatedRoute, private router: Router) {
   }
 
@@ -45,6 +47,10 @@ export class UsersComponent implements OnInit {
         this.findAllUsers();
         this.cleanData();
       });
+  }
+  follow(userId){
+    this.followService.addFollowings(userId)
+      .then(response => console.log(response));
   }
 
   updateUser() {

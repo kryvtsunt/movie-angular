@@ -26,6 +26,7 @@ import {UsersComponent} from "./users/users.component";
 import {MoviesComponent} from "./movies/movies.component";
 import {LogsComponent} from "./logs/logs.component";
 import {ActivityServiceClient} from "./services/activity.service.client";
+import {FollowServiceClient} from "./services/follow.service.client";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import {ActivityServiceClient} from "./services/activity.service.client";
     HttpClientModule,
     routing
   ],
-  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient, MovieServiceClient, ReviewServiceClient, LikeServiceClient, BookmarkServiceClient, ActivityServiceClient],
+  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient, MovieServiceClient, ReviewServiceClient, LikeServiceClient, BookmarkServiceClient, ActivityServiceClient, FollowServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule {

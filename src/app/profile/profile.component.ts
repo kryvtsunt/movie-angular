@@ -4,6 +4,7 @@ import {UserServiceClient} from '../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LikeServiceClient} from "../services/like.service.client";
 import {BookmarkServiceClient} from "../services/bookmark.service.client";
+import {FollowServiceClient} from "../services/follow.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ import {BookmarkServiceClient} from "../services/bookmark.service.client";
 export class ProfileComponent implements OnInit {
 
   constructor(private router: Router, private service: UserServiceClient, private likeService: LikeServiceClient,
+              private followService: FollowServiceClient,
               private bookmarkService: BookmarkServiceClient, private route: ActivatedRoute) {
   }
 
@@ -20,8 +22,9 @@ export class ProfileComponent implements OnInit {
   profile: boolean;
   edit: boolean;
   admin = false;
-  likedMovies;
-  bookmarkedMovies;
+  likedMovies =[];
+  bookmarkedMovies =[];
+  followings = [];
   boyImg = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100'
   boyImg2 = 'http://webiconspng.com/wp-content/uploads/2016/11/avatar_business_costume_male_man_office_user_icon_403022.png'
   girlImg = 'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-girl-flat.png'
@@ -69,6 +72,11 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  findAllFollowings(){
+    this.followService.findAllFollowings()
+      .then((followings) => {console.log(followings); this.followings = followings})
+  }
+
   ngOnInit() {
     this.edit = false;
     this.route.params.subscribe(
@@ -84,10 +92,11 @@ export class ProfileComponent implements OnInit {
               }
               this.findAllLikedMovies();
               this.findAllBookmarkedMovies();
+              this.findAllFollowings();
             });
 
         } else {
-          // this.profile = false;
+          this.profile = false;
           this.service.findUserByUsername(params.username)
             .then(user => {
               this.user = user;

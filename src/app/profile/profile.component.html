@@ -161,6 +161,21 @@
   </div>
   <br/>
 
+  <div  *ngIf="followings.length > 0" class="card-deck d-flex justify-content-center">
+    <div *ngFor="let u of followings">
+      <div *ngIf="true" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px">
+        <div class="btn">
+          <img class="card-img-top img-fluid bg-primary" src="{{u.following.img_path}}" alt="Card image">
+          <h4 class="card-title card-header ">@<strong>{{u.following.username}}</strong></h4>
+        </div>
+        <div class="card-body">
+          <h6 class="card-text">First Name: <em>{{u.following.firstName}}</em></h6>
+          <h6 class="card-text">Last Name: <em>{{u.following.lastName}}</em></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div *ngIf="likedMovies.length > 0">
     <h3 *ngIf="profile">Movies You liked:</h3>
     <h3 *ngIf="!profile">Movies this User liked:</h3>
