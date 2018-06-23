@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 // import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CommentServiceClient {
-  addComment(movieId, com, mov) {
-    const comment = {comment: com, movie: mov}
-    return fetch('http://localhost:4000/api/comment/movie/' + movieId + '/add', {
-      body: JSON.stringify(comment),
+export class ReviewServiceClient {
+  addReview(movieId, com, mov) {
+    const review = {review: com, movie: mov}
+    return fetch('http://localhost:4000/api/review/movie/' + movieId + '/add', {
+      body: JSON.stringify(review),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
       headers: {
@@ -17,8 +17,8 @@ export class CommentServiceClient {
     })
   }
 
-  findAllComments(movieId) {
-    return fetch('http://localhost:4000/api/comment/movie/' + movieId + '/find', {
+  findAllReviews(movieId) {
+    return fetch('http://localhost:4000/api/review/movie/' + movieId + '/find', {
       credentials: 'include', // include, same-origin, *omit
     }). then((response) => response.json())
   }

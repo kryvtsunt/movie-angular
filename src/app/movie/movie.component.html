@@ -20,25 +20,24 @@
     </div>
 
 
-    <input type="text" name="title" [(ngModel)]="com" class="form-control"
-           placeholder="Add Comment">
-    <button class="btn btn-success fa fa-plus" (click)="addComment()"></button>
+    <input type="text" name="title" [(ngModel)]="review" class="form-control"
+           placeholder="Add Review">
+    <button class="btn btn-success fa fa-plus" (click)="addReview()"></button>
   </div>
 
 
-  <div *ngIf="comments">
-    <div *ngFor="let res of comments">
+  <div *ngIf="reviews">
+    <div *ngFor="let review of reviews">
       <div class="row container-fluid container list-group-item" style="padding: 5px; margin: 5px">
         <div class="col-md-2">
-
-          <h5>{{res.username}}</h5>
-
+          <img src="{{review.user.img_path}}" width="50px" >
+          <h5>{{review.user.username}}</h5>
         </div>
         <div class="col-md-8">
-          <p> {{res.comment}} </p>
+          <p> {{review.review}} </p>
         </div>
         <div class="col-md-2">
-          <p> {{res.date.split("G")[0]}} </p>
+          <p> {{review.date.split("G")[0]}} </p>
         </div>
       </div>
     </div>

@@ -1,31 +1,97 @@
-<!--<div class="sidenav">-->
-<!--<i class=" fa fa-2x fa-users"></i>-->
-<!--<i class=" fa fa-2x fa-user"></i>-->
-<!--<i class=" fa fa-2x fa-edit"></i>-->
-<!--</div>-->
 <div class="container-fluid">
-  <br/>
-  <h4>List of Movies</h4>
-  <div class="card-deck">
-    <div *ngFor="let movie of movies">
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <div *ngIf="movie.poster_path !== null">
-            <img class="card-img" src="{{img}}{{movie.poster_path}}">
-          </div>
-          <div *ngIf="movie.poster_path === null">
-            <img class="card-img" src="http://a-movies.info/public/img/no_poster.jpg">
+<br/>
+<h3>List of Movies</h3>
+<br/>
+<div class="row">
+  <div class="card-deck d-flex justify-content-center">
+    <div *ngFor="let mov of movies">
+      <div class="card h-100" style="width: 20rem;" *ngIf="movie.id !== mov.id">
+        <img *ngIf="mov.poster_path !== null" class="card-img-top img-fluid" src="{{img}}{{mov.poster_path}}">
+        <img *ngIf="mov.poster_path === null" class="card-img-top img-fluid "
+             src="http://a-movies.info/public/img/no_poster.jpg">
+        <div class="card-header"> <h4 class="card-title">{{mov.title}}</h4></div>
+        <div class="card-body" >
+
+          <p class="card-text">{{mov.overview.substring(0, 100)+'..'}}</p>
+          <p class="card-text">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-sm btn-dark float-left" (click)="editMovie(mov)"> Press to edit </button>
+          <i class="btn btn-danger fa fa fa-times float-left"></i>
+          <div class="float-right">
+            <i class="fa fa fa-heart" aria-hidden="true"
+               style="margin-top: 5px; margin-right: 10px;">{{mov.likes}}</i>
+            <i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.likes}}</i>
           </div>
         </div>
-        <div class="card-body">
-          <div class="card-text">
-            {{movie.title}}
+      </div>
+
+
+      <div class="card h-100" style="width: 20rem;" *ngIf="movie.id === mov.id">
+        <img class="card-img-top img-fluid" src="{{img}}{{mov.poster_path}}">
+        <img *ngIf="mov.poster_path === null" class="card-img-top img-fluid ">
+        <div class="card-header">
+          <label><strong> Poster:</strong> </label>
+          <input [(ngModel)]="movie.poster_path"
+                 placeholder="Title"
+                 class="form-control"/>
+          <label><strong> Title:</strong> </label><input [(ngModel)]="movie.title"
+                 placeholder="Title"
+                 class="form-control"/>
+        </div>
+        <div class="card-body" >
+          <label><strong> Overview:</strong> </label>
+          <textarea rows="10" [(ngModel)]="movie.overview"
+                 placeholder="Overview"
+                     class="form-control"></textarea>
+          <p class="card-text">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-sm btn-dark float-left" (click)="editMovie(mov)"> Press to edit </button>
+          <i class="btn btn-danger fa fa fa-times float-left"></i>
+          <div class="float-right">
+            <i class="fa fa fa-heart" aria-hidden="true"
+               style="margin-top: 5px; margin-right: 10px;">{{mov.likes}}</i>
+            <i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.likes}}</i>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!--<div class="container">-->
+<!--<div class="row" >-->
+<!--<div class="col-xs-6 col-md-4" *ngFor="let movie of movies">-->
+<!--<div class="card h-100 list-group-item-action">-->
+<!--<div class="wrapper">-->
+<!--&lt;!&ndash;<img class="card-img-top img-fluid" src="//placehold.it/760x270" alt="Card image cap">&ndash;&gt;-->
+<!--<img *ngIf="movie.poster_path !== null" class="card-img-top img-fluid" src="{{img}}{{movie.poster_path}}" alt="Card image cap">-->
+<!--<img *ngIf="movie.poster_path === null" class="card-img-top img-fluid"-->
+<!--src="http://a-movies.info/public/img/no_poster.jpg" alt="Card image cap">-->
+<!--</div>-->
+<!--<div class="card-body">-->
+<!--<h4 class="card-title">{{movie.title}}</h4>-->
+
+<!--<p class="card-text">{{movie.overview.substring(0,100)+'...'}} </p>-->
+<!--<p class="card-text">-->
+<!--<small class="text-muted">Last updated 3 mins ago</small>-->
+<!--</p>-->
+<!--<div class="d-flex justify-content-end"><i class="fa fa-comment" aria-hidden="true"></i>0</div>-->
+<!--</div>-->
+<!--<div class="card-img-overlay">-->
+<!--<button class="btn btn-sm btn-primary float-right"></button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+
 
 
 

@@ -18,7 +18,7 @@ import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {UserServiceClient} from './services/user.service.client';
 import {AdminComponent} from './admin/admin.component';
-import {CommentServiceClient} from "./services/comment.service.client";
+import {ReviewServiceClient} from "./services/review.service.client";
 import {LikeServiceClient} from "./services/like.service.client";
 import {MovieServiceClient} from "./services/movie.service.client";
 import {BookmarkServiceClient} from "./services/bookmark.service.client";
@@ -47,7 +47,7 @@ import {MoviesComponent} from "./movies/movies.component";
     HttpClientModule,
     routing
   ],
-  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient, MovieServiceClient, CommentServiceClient, LikeServiceClient, BookmarkServiceClient],
+  providers: [OmdbServiceClient, SearchServiceClient, UserServiceClient, MovieServiceClient, ReviewServiceClient, LikeServiceClient, BookmarkServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule {

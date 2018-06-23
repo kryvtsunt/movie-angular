@@ -45,7 +45,6 @@ export class MoviesComponent implements OnInit {
   }
 
   editMovie(mov) {
-    this.editMode = true;
     this.movie = Object.assign({}, mov);
   }
 

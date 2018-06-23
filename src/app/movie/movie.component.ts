@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SearchServiceClient} from '../services/search.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Movie} from '../models/movie.model.client';
-import {Comment} from '../models/comment.model.client';
+import {Review} from '../models/review.model.client';
 import {UserServiceClient} from '../services/user.service.client';
-import {CommentServiceClient} from '../services/comment.service.client';
+import {ReviewServiceClient} from '../services/review.service.client';
 import {MovieServiceClient} from '../services/movie.service.client';
 import {LikeServiceClient} from '../services/like.service.client';
 import {BookmarkServiceClient} from '../services/bookmark.service.client';
@@ -17,8 +17,8 @@ import {BookmarkServiceClient} from '../services/bookmark.service.client';
 export class MovieComponent implements OnInit {
 
   movie: Movie
-  com: String
-  comments: [Comment];
+  review: String
+  reviews: [Review];
   img = 'https://image.tmdb.org/t/p/w500/';
   loggedIn: boolean;
   liked: boolean;
@@ -26,7 +26,7 @@ export class MovieComponent implements OnInit {
   numberOfLikes: number;
 
   constructor(private bookmarkService: BookmarkServiceClient, private likeService: LikeServiceClient,
-              private movieService: MovieServiceClient, private commentService: CommentServiceClient,
+              private movieService: MovieServiceClient, private reviewService: ReviewServiceClient,
               private userService: UserServiceClient, private searchService: SearchServiceClient,
               private route: ActivatedRoute) {}
 
@@ -77,11 +77,11 @@ export class MovieComponent implements OnInit {
       });
   }
 
-  findAllComments() {
-    this.commentService.findAllComments(this.movie.id)
+  findAllReviews() {
+    this.reviewService.findAllReviews(this.movie.id)
       .then((result) => {
-        this.comments = result
-        console.log(this.comments);
+        this.reviews = result
+        console.log(this.reviews);
       });
   }
 
@@ -96,10 +96,10 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  addComment() {
-    this.commentService.addComment(this.movie.id, this.com, this.movie)
+  addReview() {
+    this.reviewService.addReview(this.movie.id, this.review, this.movie)
       .then((response) => {
-        this.findAllComments()
+        this.findAllReviews();
       });
   }
 
@@ -117,14 +117,14 @@ export class MovieComponent implements OnInit {
               this.checkLike();
               this.checkBookmark();
               this.countLikes();
-              this.findAllComments();
+              this.findAllReviews();
             }
           });
       });
     // this.router.events.subscribe(() => {
     //     this.checkStatus();
     //     this.checkLike();
-    //     this.findAllComments();
+    //     this.findAllReviews();
     //   }
     // );
   }
