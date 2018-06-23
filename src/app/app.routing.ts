@@ -11,6 +11,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {AdminComponent} from "./admin/admin.component";
 import {UsersComponent} from "./users/users.component";
 import {MoviesComponent} from "./movies/movies.component";
+import {LogsComponent} from "./logs/logs.component";
 
 
 const appRoutes: Routes = [
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   {path: 'admin', component: AdminComponent, children: [
     {path: '', redirectTo: 'users', pathMatch: 'full'},
     {path: 'users', component: UsersComponent},
-    {path: 'movies', component: MoviesComponent}
+    {path: 'movies', component: MoviesComponent},
+    {path: 'logs', component: LogsComponent}
   ]},
   // {path: 'tk', component: NavbarComponent}
   // {path: '', redirectTo: 'home', pathMatch: 'full'},

@@ -6,8 +6,8 @@
 <div class="container-fluid text-center">
   <br/>
   <h4>List of Users</h4>
-  <table class="table table-responsive table-hover table-bordred table-striped" [ngClass]="{'usertable': !admin}">
-    <thead>
+  <table class="table table-hover table-bordred table-striped" [ngClass]="{'usertable': !admin}">
+    <thead class="thead-dark">
     <th>Image</th>
     <th>Username</th>
     <th *ngIf="admin">Password</th>
@@ -135,6 +135,21 @@
     </tr>
     </tbody>
   </table>
+
+  <div class="card-deck d-flex justify-content-center" >
+    <div *ngFor="let user of users">
+    <div class="card btn shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px" routerLink= {{routerLink}}{{user.username}}>
+      <img class="card-img-top img-fluid bg-primary" src="{{user.img_path}}" alt="Card image">
+      <div class="card-header">
+        <h4 class="card-title ">@<strong>{{user.username}}</strong></h4>
+      </div>
+      <div class="card-body">
+        <h6 class="card-text">First Name: <em>{{user.firstName}}</em></h6>
+        <h6 class="card-text">Last Name: <em>{{user.lastName}}</em></h6>
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
 
 

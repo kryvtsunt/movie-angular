@@ -11,7 +11,6 @@
              src="http://a-movies.info/public/img/no_poster.jpg">
         <div class="card-header"> <h4 class="card-title">{{mov.title}}</h4></div>
         <div class="card-body" >
-
           <p class="card-text">{{mov.overview.substring(0, 100)+'..'}}</p>
           <p class="card-text">
             <small class="text-muted">Last updated 3 mins ago</small>
@@ -27,8 +26,6 @@
           </div>
         </div>
       </div>
-
-
       <div class="card h-100" style="width: 20rem;" *ngIf="movie.id === mov.id">
         <img class="card-img-top img-fluid" src="{{img}}{{mov.poster_path}}">
         <img *ngIf="mov.poster_path === null" class="card-img-top img-fluid ">
