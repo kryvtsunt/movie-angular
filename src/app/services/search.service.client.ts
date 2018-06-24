@@ -16,10 +16,10 @@ export class SearchServiceClient {
     return fetch(url).then(response => response.json());
   }
 
-  searchPopularMovies(){
-    const url = 'https://api.themoviedb.org/3/movie/popular?api_key=01202464e80fb52cd90af159ba329661&language=en-US&page=1';
-    return fetch(url).then(response => response.json());
-  }
+  // searchPopularMovies(){
+  //   const url = 'https://api.themoviedb.org/3/movie/popular?api_key=01202464e80fb52cd90af159ba329661&language=en-US&page=1';
+  //   return fetch(url).then(response => response.json());
+  // }
 
   multiSearch(search){
     const url = 'https://api.themoviedb.org/3/search/multi?api_key=01202464e80fb52cd90af159ba329661&language=en-US&query=' + search + '&page=1&include_adult=false'
@@ -51,6 +51,13 @@ export class SearchServiceClient {
     return fetch(url).then(response => response.json());
   }
 
+  dicover(genre, adult, sort, page, year) {
+    let url = 'https://api.themoviedb.org/3/discover/movie?api_key=01202464e80fb52cd90af159ba329661&language=en-US&sort_by=' + sort + '&include_adult=' + adult + '&include_video=false&page=' + page + '&primary_release_year=' + year + '&with_genres=' + genre
+    if (year === 'None'){
+    url = 'https://api.themoviedb.org/3/discover/movie?api_key=01202464e80fb52cd90af159ba329661&language=en-US&sort_by=' + sort + '&include_adult=' + adult + '&include_video=false&page=' + page + '&with_genres=' + genre;
+    }
+    return fetch(url).then(response => response.json());
+  }
 
   constructor(private httpClient: HttpClient) {}
 }

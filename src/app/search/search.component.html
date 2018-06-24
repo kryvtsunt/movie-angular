@@ -1,42 +1,118 @@
-<div class="">
-  <h1> Advanced Search</h1>
-  <p> Use this app to browse new releases and find your favourite movies </p>
-  <form>
-    <div class="form-group">
-      <span class="input-group">
-      <input type="text" name="title" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control"
-             placeholder="Search a movie">
-      <button class="btn btn-success" (click)="searchMoovie(title)">Search</button>
-    </span>
-    </div>
-  </form>
-
-  <div *ngIf="results">
-
-    <div *ngFor="let res of results">
-      <div class="list-group-item list-group-item-action " style="margin: 10px; border: 1px white solid" routerLink="../movie/{{res.id}}">{{res.title}>
-        <div class="row">
-          <div class="col-md-9">
-
-            <h4><a routerLink="../movie/{{res.id}}">{{res.title}}</a></h4>
-            <p> {{res.overview.substring(0, 250)+'...' }} </p>
-            <div>
-              <strong>Genres: </strong>
-              <span>Genre</span>
-            </div>
-
+<div class="bg-light">
+  <div class="container">
+    <br/>
+    <div class="row">
+      <div class="col-md-6 col-sm-12" style="padding-right: 50px">
+        <h1>Search</h1>
+        <p> Use the Search bar to find a movie by name </p>
+        <br/>
+        <form>
+          <div class="form-group">
+      <span class="input-group input-group-sm">
+        <input type="text" name="title" [(ngModel)]="title" (keyup)="searchMoovie()" class="form-control"
+               placeholder="Search a movie">
+        <!--<button class="btn-sm btn-dark" (click)="searchMoovie(title)">Search</button>-->
+      </span>
+            <br/>
           </div>
-          <div class="col-md-3">
-            <div *ngIf="res.poster_path; else poster">
-            <img src="{{img}}{{res.poster_path}}" width="100">
+        </form>
+      </div>
+      <div class="col-md-6 col-sm-12" style="border-left: 3px solid black; padding-left: 50px">
+        <h1> Discover </h1>
+        <p> Don't know the exact name of the movie? <br/> Use the Dicover bar to find movies by different criterias </p>
+        <span class="btn-group container" role="group" aria-label="Basic example">
+            <div class="row">
+          <div class="dropdown col-md-4">
+             <button class="btn btn-block btn-light disabled"> Year </button>
+
+            <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{year}}
+            </button>
+
+            <div class="dropdown-menu scrollable" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" *ngFor="let y of years">
+                 <a (click)="year = y"> {{y}} </a>
+              </a>
             </div>
-            <ng-template #poster>
-              <img src="http://a-movies.info/public/img/no_poster.jpg" width="100">
-            </ng-template>
           </div>
-        </div>
+          <div class="dropdown col-md-4">
+              <button class="btn btn-block btn-light disabled"> Genre </button>
+            <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{genre.name}}
+            </button>
+            <div class="dropdown-menu scrollable" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item"  *ngFor="let g of genres">
+               <a (click)="setGenre(g)"> {{g.name}} </a>
+              </a>
+            </div>
+          </div>
+          <div class="dropdown col-md-4">
+               <button class="btn btn-block btn-light disabled"> Sort By </button>
+            <button class="btn btn-light dropdown-toggle" style="padding-right: 20px" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{sort.name}}
+            </button>
+            <div class="dropdown-menu scrollable-lg" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item"  *ngFor="let s of sorts">
+                <a (click)="setSort(s)"> {{s.name}} </a>
+              </a>
+            </div>
+          </div>
+              <br/>
+               </div>
+        </span>
+        <br/>
+        <br/>
+        <button class="btn btn-dark btn-block col-md-12" (click)="discover()"> Search </button>
+
       </div>
     </div>
 
+    <div class="container" *ngIf="results">
+      <div *ngFor="let res of results">
+        <div class="list-group-item list-group-item-action " style="margin: 10px; border: 1px white solid"
+             routerLink="../movie/{{res.id}}">
+          <div class="row">
+            <div class="col-md-9">
+
+              <h4><a routerLink="../movie/{{res.id}}">{{res.title}}</a></h4>
+              <p *ngIf="res.overview.length > 250"> {{res.overview.substring(0, 250)+'...' }} </p>
+              <p *ngIf="res.overview.length <= 250"> {{res.overview }} </p>
+              <div>
+                <strong>Genres: </strong>
+                <span>Genre</span>
+              </div>
+
+            </div>
+            <div class="col-md-3">
+              <div *ngIf="res.poster_path; else poster">
+                <img src="{{img}}{{res.poster_path}}" width="100">
+              </div>
+              <ng-template #poster>
+                <img src="http://a-movies.info/public/img/no_poster.jpg" width="100">
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div *ngIf=" mode === 'discover' " class="btn-toolbar conainer d-flx justify-content-center" role="toolbar"
+           aria-label="Toolbar with button groups">
+        <div class="btn-group " role="group">
+          <button type="button" (click)="setPage(1)" [ngClass]="{'active': page === 1}"  class=" btn btn-outline-dark">1</button>
+          <button type="button" (click)="setPage(2)" [ngClass]="{'active': page === 2}"  class="btn btn-outline-dark">2</button>
+          <button type="button" (click)="setPage(3)" [ngClass]="{'active': page === 3}"  class="btn btn-outline-dark">3</button>
+          <button type="button" (click)="setPage(4)" [ngClass]="{'active': page === 4}"  class="btn btn-outline-dark">4</button>
+          <button type="button" (click)="setPage(5)" [ngClass]="{'active': page === 5}"  class="btn btn-outline-dark">5</button>
+
+
+        </div>
+      </div>
+    </div>
   </div>
+  <br/>
+  <br/>
+  <br/>
 </div>

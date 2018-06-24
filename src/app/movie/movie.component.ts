@@ -25,6 +25,7 @@ export class MovieComponent implements OnInit {
   bookmarked: boolean;
   numberOfLikes: number;
   local: boolean
+  localMovie: Movie
 
   constructor(private bookmarkService: BookmarkServiceClient, private likeService: LikeServiceClient,
               private movieService: MovieServiceClient, private reviewService: ReviewServiceClient,
@@ -33,9 +34,8 @@ export class MovieComponent implements OnInit {
   }
 
   checkStatus() {
-    this.userService.checkStatus().then(response => {
-      this.loggedIn = response;
-    });
+    return this.userService.checkStatus().then(response => this.loggedIn = response
+    );
   }
 
   checkLike() {
@@ -106,35 +106,41 @@ export class MovieComponent implements OnInit {
   }
 
   setup() {
-    this.checkStatus();
-    this.checkLike();
-    this.checkBookmark();
-    this.countLikes();
+    this.checkStatus()
+      .then((res) => {
+        if (res) {
+          this.checkLike();
+          this.checkBookmark();
+          this.countLikes();
+        }
+      });
     this.findAllReviews();
   }
+
   ngOnInit() {
     this.route.params.subscribe(
       params => {
         this.movieService.findMovie(params.id)
           .then(movie => {
             if (movie === null) {
-              this.searchService.searchMoovieById(params.id)
-                .then(mov => {
-                  this.local = false;
-                  this.movie = mov;
-                  console.log(this.movie);
-                })
-                .then(() => {
-                  {
-                    this.setup();
-                  }
-                });
+              this.local = false;
             } else {
               this.local = true;
-              this.movie = movie;
-              this.setup()
+              this.localMovie = movie;
+            }
+            return this.searchService.searchMoovieById(params.id)
+          })
+          .then(mov => {
+            this.local = false;
+            this.movie = mov;
+            console.log(mov);
+          })
+          .then(() => {
+            {
+              this.setup();
             }
           });
+
       });
     // this.router.events.subscribe(() => {
     //     this.checkStatus();

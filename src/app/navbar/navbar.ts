@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserServiceClient} from '../services/user.service.client';
 import {SearchServiceClient} from '../services/search.service.client';
@@ -11,9 +11,8 @@ import {Movie} from '../models/movie.model.client';
 })
 
 export class NavbarComponent implements OnInit {
-
+  title = ''
   loggedIn: boolean;
-  title = '';
   results: Movie[];
   searchBardMode = 0;
   img = 'htitleps://image.tmdb.org/t/p/w500/';
@@ -27,7 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   search() {
-    console.log(this.title[0]);
+
     if (this.title.length >= 0 && this.title[0] !== '@') {
       this.results = [];
       this.searchServie.searchMovieByTitle(this.title).then((response) => {
@@ -59,9 +58,9 @@ export class NavbarComponent implements OnInit {
       }});
     } else {
       this.searchBardMode = 3;
-      this.title = '';
       this.results = null;
-      this.router.navigate(['search']);
+      this.router.navigate(['search', {title: 'aba'}]);
+      this.title = '';
     }
   }
 

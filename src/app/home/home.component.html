@@ -41,11 +41,10 @@
   <section class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">Welcome to MovieDB</h1>
-      <p class="lead text-muted">This is a prototype of my web application. Proceed to the ABOUT tab in the navigation
-        bar
-        to learn more</p>
+      <p class="lead text-muted">This is a prototype of my web application. Use this app to browse new releases and find your favourite movies. <br/>Proceed to the ABOUT tab in the navigation
+        bar to learn more</p>
       <p>
-        <a href="#" class="btn btn-dark">Learn more</a>
+        <a routerLink="../about" class="btn btn-dark">Learn more</a>
       </p>
     </div>
   </section>
@@ -74,7 +73,7 @@
         <div class="album ">
           <div class="container">
             <div class="row">
-              <div class="card" routerLink="../movie/{{res.id}}" style="margin-left: 3px; margin-bottom: 3px" *ngFor="let res of movies">
+              <div class="card" routerLink="../movie/{{res.id}}" style="" *ngFor="let res of movies">
                 <img src="{{img}}{{res.poster_path}}" width="200px" alt="Card image cap">
                 <div class="btn card-header text-center">
                   <h5 *ngIf="res.title.length > 18">{{res.title.substring(0, 15)+' ...'}}</h5>
@@ -121,7 +120,7 @@
         </div>
         <div class="card-body">
           <p>{{story.abstract}} </p>
-          <p><a class="btn btn-secondary" href="{{story.url}}" role="button">View details &raquo;</a></p>
+          <div><a class="btn btn-secondary" href="{{story.url}}" role="button">View details &raquo;</a></div>
         </div>
         <div style="margin-bottom: 15px"class="card-footer small">
           <p><strong>{{story.byline}}</strong> <br/> {{story.published_date.split('T')[0]}}</p>

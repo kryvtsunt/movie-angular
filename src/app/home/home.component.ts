@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
       console.log(response);
       this.stories = response.results;
       this.stories.length = 12;
-    }
+    });
   }
 
   ngOnInit() {
