@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
+
 
 @Injectable()
 export class SearchServiceClient {
+
+  searchMoovieById(id: String){
+    const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=01202464e80fb52cd90af159ba329661'
+    return fetch(url).then(response => response.json());
+    // return this.httpClient.get<Object>(url);
+  }
+
   searchMovieByTitle(title: String, type= 'movie' ) {
-    const url = 'https://api.themoviedb.org/3/search/movie?api_key=01202464e80fb52cd90af159ba329661&query=' + title
+    const url = 'https://api.themoviedb.org/3/search/movie?api_key=01202464e80fb52cd90af159ba329661&page=1&include_adult=false&query=' + title
     return fetch(url).then(response => response.json());
   }
 
@@ -15,11 +21,31 @@ export class SearchServiceClient {
     return fetch(url).then(response => response.json());
   }
 
-  searchMoovieById(id: String){
-    const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=01202464e80fb52cd90af159ba329661'
+  multiSearch(search){
+    const url = 'https://api.themoviedb.org/3/search/multi?api_key=01202464e80fb52cd90af159ba329661&language=en-US&query=' + search + '&page=1&include_adult=false'
     return fetch(url).then(response => response.json());
-    // return this.httpClient.get<Object>(url);
   }
+
+  discoverPopularMovies(){
+    const url = 'https://api.themoviedb.org/3/discover/movie?api_key=01202464e80fb52cd90af159ba329661&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
+    return fetch(url).then(response => response.json());
+  }
+
+  discoverHighestRatedR(){
+    const url = 'https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&sort_by=vote_average.desc&api_key=01202464e80fb52cd90af159ba329661'
+    return fetch(url).then(response => response.json());
+  }
+
+  discoverBestMoviesOfTheYear(){
+    const url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=2018&sort_by=vote_average.desc&api_key=01202464e80fb52cd90af159ba329661'
+    return fetch(url).then(response => response.json());
+  }
+
+  discoverMostPopularKids(){
+    const url = 'https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=G&sort_by=popularity.desc&api_key=01202464e80fb52cd90af159ba329661'
+    return fetch(url).then(response => response.json());
+  }
+
 
   constructor(private httpClient: HttpClient) {}
 }
