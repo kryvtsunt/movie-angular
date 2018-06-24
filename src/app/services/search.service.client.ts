@@ -46,6 +46,11 @@ export class SearchServiceClient {
     return fetch(url).then(response => response.json());
   }
 
+  findStories(){
+    const url='https://api.nytimes.com/svc/topstories/v2/movies.json?api_key=f88d565308f04acd905381074c76dda0'
+    return fetch(url).then(response => response.json());
+  }
+
 
   constructor(private httpClient: HttpClient) {}
 }

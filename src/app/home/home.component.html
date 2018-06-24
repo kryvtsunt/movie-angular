@@ -55,25 +55,12 @@
 
     <div class="row">
 
-      <div class="col-6 col-md-3" style="background-color: rgb(233, 236, 239); margin-top: 20px">
+      <div class="col-md-3 col-sm-12" style="background-color: rgb(233, 236, 239); margin-top: 20px">
         <div class="list-group">
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most Popular Movies'}"
-                  (click)="discoverPopularMoovies()" style="margin-bottom: 30px; margin-top: 150px"><h6>Most Popular
-            Movies </h6>
+          <button class="list-group-item list-group-item-action" [ngClass]="{'bg-dark text-white': title === 'Most Popular Movies'}"
+                  (click)="discoverPopularMoovies()" style="margin-bottom: 30px; margin-top: 150px"><h6>Most Popular Movies </h6>
           </button>
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most Popular Kids\' Movies'}"
-                  (click)="discoverPopularKids()" style="margin-bottom: 30px"><h6> Most Popular Kids' Movies </h6>
-          </button>
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most PopulaKids\' Movies'}"
-                  (click)="discoverPopularKids()" style="margin-bottom: 30px"><h6> Most Popular Kids' Movies </h6>
-          </button>
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most Pular Kids\' Movies'}"
-                  (click)="discoverPopularKids()" style="margin-bottom: 30px"><h6> Most Popular Kids' Movies </h6>
-          </button>
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most PopulaKids\' Movies'}"
-                  (click)="discoverPopularKids()" style="margin-bottom: 30px"><h6> Most Popular Kids' Movies </h6>
-          </button>
-          <button class="list-group-item" [ngClass]="{'bg-dark text-white': title === 'Most PopulaKids\' Movies'}"
+          <button class="list-group-item list-group-item-action" [ngClass]="{'bg-dark text-white': title === 'Most Popular Kids\' Movies'}"
                   (click)="discoverPopularKids()" style="margin-bottom: 30px"><h6> Most Popular Kids' Movies </h6>
           </button>
 
@@ -81,15 +68,18 @@
       </div><!--/span-->
 
 
-      <div class="col-12 col-md-9">
+      <div class="col-md-9">
         <br/>
         <div class="container text-center shadow-lg p-3 mb-5 bg-white rounded"><h3>{{title}}</h3></div>
         <div class="album ">
           <div class="container">
             <div class="row">
-              <div class="card" style="margin-right: 4px; margin-bottom: 4px" *ngFor="let res of movies">
+              <div class="card" routerLink="../movie/{{res.id}}" style="margin-left: 3px; margin-bottom: 3px" *ngFor="let res of movies">
                 <img src="{{img}}{{res.poster_path}}" width="200px" alt="Card image cap">
-                <div class="card-header text-center"><h5 class="card-title">{{res.title.substring(0, 10)}}</h5></div>
+                <div class="btn card-header text-center">
+                  <h5 *ngIf="res.title.length > 18">{{res.title.substring(0, 15)+' ...'}}</h5>
+                  <h5 *ngIf="res.title.length <= 18">{{res.title.substring(0, 18)}}</h5>
+                </div>
               </div>
             </div>
 
@@ -101,65 +91,50 @@
 
     </div><!--/row-->
     <br/>
+    <div *ngIf="adsOn">
     <p class="float-right hidden-md-up">
-      <button type="button" class="btn btn-dark btn-sm" data-toggle="offcanvas">Close</button>
+      <button type="button" class="btn btn-dark btn-sm" data-toggle="offcanvas" (click)="adsOn = false">Close</button>
     </p>
     <div class="jumbotron">
-      <h1>Here could be your addvertisement!</h1>
-      <p>Contact MovieDB administration at kryvtsun.t@husky.neu.edu to place your adds here</p>
+      <h1>Here could be your advertisement!</h1>
+      <p>Contact MovieDB administration at kryvtsun.t@husky.neu.edu to place your ads here</p>
+    </div>
     </div>
 
 
+    <!--<div class="row">-->
+    <!--<div class="col-6 col-lg-4" *ngFor="let story of stories">-->
+    <!--<img src="{{story.multimedia[3].url}}">-->
+    <!--<h2>{{story.title}}</h2>-->
+    <!--<p>{{story.abstract}} </p>-->
+    <!--<p><a class="btn btn-secondary" href="{{story.url}}" role="button">View details &raquo;</a></p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <hr/>
+    <h3><strong>Fresh Articles of the Cinema World</strong></h3>
+    <br/>
     <div class="row">
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-      <div class="col-6 col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!--/span-->
-    </div><!--/row-->
-
+      <div class="col-lg-3 col-md-4 col-sm-6 card" *ngFor="let story of stories">
+        <img class="card-img img-fluid" style="margin-top: 15px" src="{{story.multimedia[4].url}}">
+        <div class="card-header">
+          <h5>{{story.title}}</h5>
+        </div>
+        <div class="card-body">
+          <p>{{story.abstract}} </p>
+          <p><a class="btn btn-secondary" href="{{story.url}}" role="button">View details &raquo;</a></p>
+        </div>
+        <div style="margin-bottom: 15px"class="card-footer small">
+          <p><strong>{{story.byline}}</strong> <br/> {{story.published_date.split('T')[0]}}</p>
+        </div>
+      </div>
+    </div>
     <br/>
     <br/>
     <hr/>
-  </div><!--/.container-->
-
+    <br/>
+    <br/>
+    <br/>
+  </div>
 </div>
 
 
