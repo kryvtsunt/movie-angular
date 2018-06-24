@@ -43,19 +43,20 @@
               {{genre.name}}
             </button>
             <div class="dropdown-menu scrollable" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item"  *ngFor="let g of genres">
+              <a class="dropdown-item" *ngFor="let g of genres">
                <a (click)="setGenre(g)"> {{g.name}} </a>
               </a>
             </div>
           </div>
           <div class="dropdown col-md-4">
                <button class="btn btn-block btn-light disabled"> Sort By </button>
-            <button class="btn btn-light dropdown-toggle" style="padding-right: 20px" type="button" data-toggle="dropdown"
+            <button class="btn btn-light dropdown-toggle" style="padding-right: 20px" type="button"
+                    data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
               {{sort.name}}
             </button>
             <div class="dropdown-menu scrollable-lg" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item"  *ngFor="let s of sorts">
+              <a class="dropdown-item" *ngFor="let s of sorts">
                 <a (click)="setSort(s)"> {{s.name}} </a>
               </a>
             </div>
@@ -65,47 +66,84 @@
         </span>
         <br/>
         <br/>
-        <button class="btn btn-dark btn-block col-md-12" (click)="discover()"> Search </button>
+        <button class="btn btn-sm btn-dark btn-block col-md-12" (click)="discover()"> Search</button>
 
       </div>
     </div>
-
+    <br/>
+    <br/>
     <div class="container" *ngIf="results">
-      <div *ngFor="let res of results">
-        <div class="list-group-item list-group-item-action " style="margin: 10px; border: 1px white solid"
-             routerLink="../movie/{{res.id}}">
-          <div class="row">
-            <div class="col-md-9">
-
-              <h4><a routerLink="../movie/{{res.id}}">{{res.title}}</a></h4>
-              <p *ngIf="res.overview.length > 250"> {{res.overview.substring(0, 250)+'...' }} </p>
-              <p *ngIf="res.overview.length <= 250"> {{res.overview }} </p>
-              <div>
-                <strong>Genres: </strong>
-                <span>Genre</span>
+      <div class="row">
+        <div class="card-deck d-flex justify-content-center">
+          <div *ngFor="let mov of results">
+            <div class="card h-100 shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem" routerLink="../movie/{{mov.id}}">
+              <img *ngIf="mov.poster_path !== null" class="card-img-top img-fluid" src="{{img}}{{mov.poster_path}}">
+              <img *ngIf="mov.poster_path === null" class="card-img-top img-fluid "
+                   src="http://a-movies.info/public/img/no_poster.jpg">
+              <div class="card-header"><h4 class="card-title">{{mov.title}}</h4></div>
+              <div class="card-body">
+                <p class="card-text">{{mov.overview.substring(0, 100)+'..'}}</p>
+                <p class="card-text">
+                  <small>{{mov.title}}</small>
+                </p>
               </div>
-
-            </div>
-            <div class="col-md-3">
-              <div *ngIf="res.poster_path; else poster">
-                <img src="{{img}}{{res.poster_path}}" width="100">
+              <div class="card-footer">
+                <!--<button class="btn btn-sm btn-dark float-left" (click)="editMovie(mov)"> Press to edit </button>-->
+                <!--<button class="btn btn-danger fa fa fa-times float-left" (click)="deleteMovie(mov._id)"></button>-->
+                <!--<div class="float-right">-->
+                  <!--<i class="fa fa fa-heart" aria-hidden="true"-->
+                     <!--style="margin-top: 5px; margin-right: 10px;"></i>-->
+                  <!--<i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px"></i>-->
+                <!--</div>-->
               </div>
-              <ng-template #poster>
-                <img src="http://a-movies.info/public/img/no_poster.jpg" width="100">
-              </ng-template>
             </div>
           </div>
         </div>
       </div>
+
+      <!--<div *ngFor="let res of results">-->
+      <!--<div class="list-group-item list-group-item-action " style="margin: 10px; border: 1px white solid"-->
+      <!--routerLink="../movie/{{res.id}}">-->
+      <!--<div class="row">-->
+      <!--<div class="col-md-9">-->
+
+      <!--<h4><a routerLink="../movie/{{res.id}}">{{res.title}}</a></h4>-->
+      <!--<p *ngIf="res.overview.length > 250"> {{res.overview.substring(0, 250)+'...' }} </p>-->
+      <!--<p *ngIf="res.overview.length <= 250"> {{res.overview }} </p>-->
+      <!--<div>-->
+      <!--<strong>Genres: </strong>-->
+      <!--<span>Genre</span>-->
+      <!--</div>-->
+
+      <!--</div>-->
+      <!--<div class="col-md-3">-->
+      <!--<div *ngIf="res.poster_path; else poster">-->
+      <!--<img src="{{img}}{{res.poster_path}}" width="100">-->
+      <!--</div>-->
+      <!--<ng-template #poster>-->
+      <!--<img src="http://a-movies.info/public/img/no_poster.jpg" width="100">-->
+      <!--</ng-template>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <br/>
       <br/>
       <div *ngIf=" mode === 'discover' " class="btn-toolbar conainer d-flx justify-content-center" role="toolbar"
            aria-label="Toolbar with button groups">
         <div class="btn-group " role="group">
-          <button type="button" (click)="setPage(1)" [ngClass]="{'active': page === 1}"  class=" btn btn-outline-dark">1</button>
-          <button type="button" (click)="setPage(2)" [ngClass]="{'active': page === 2}"  class="btn btn-outline-dark">2</button>
-          <button type="button" (click)="setPage(3)" [ngClass]="{'active': page === 3}"  class="btn btn-outline-dark">3</button>
-          <button type="button" (click)="setPage(4)" [ngClass]="{'active': page === 4}"  class="btn btn-outline-dark">4</button>
-          <button type="button" (click)="setPage(5)" [ngClass]="{'active': page === 5}"  class="btn btn-outline-dark">5</button>
+          <button type="button" (click)="setPage(1)" [ngClass]="{'active': page === 1}" class=" btn btn-outline-dark">
+            1
+          </button>
+          <button type="button" (click)="setPage(2)" [ngClass]="{'active': page === 2}" class="btn btn-outline-dark">2
+          </button>
+          <button type="button" (click)="setPage(3)" [ngClass]="{'active': page === 3}" class="btn btn-outline-dark">3
+          </button>
+          <button type="button" (click)="setPage(4)" [ngClass]="{'active': page === 4}" class="btn btn-outline-dark">4
+          </button>
+          <button type="button" (click)="setPage(5)" [ngClass]="{'active': page === 5}" class="btn btn-outline-dark">5
+          </button>
 
 
         </div>
