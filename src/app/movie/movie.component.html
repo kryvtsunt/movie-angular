@@ -121,20 +121,34 @@
     </div>
 
     <br/>
-    <h2> Reviews </h2>
 
     <div *ngIf="reviews">
+      <h2> Reviews </h2>
       <div *ngFor="let review of reviews">
-        <div class="row container-fluid list-group-item" style="padding: 5px; margin: 5px">
-          <div class="col-md-2">
-            <img src="{{review.user.img_path}}" width="50px">
+        <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
+
+          <div class="col-md-2 rounded bg-warning rounded "  style="padding: 20px" >
+            <!--<div class="">-->
+            <img src="{{review.user.img_path}}" width="80px">
             <h5>{{review.user.username}}</h5>
+            <!--</div>-->
           </div>
-          <div class="col-md-8">
-            <p> {{review.review}} </p>
+          <div class="col-md-8 bg-light" style="padding: 0px 15px">
+            <div class="float-right hidden-md-up rounded" ><i class="btn text-danger fa-lg fa fa-times"></i></div>
+            <br/>
+            <h5> {{review.review}} </h5>
+            <br/>
+            <br/>
           </div>
-          <div class="col-md-2">
+          <!--<div class="col-md-1">-->
+            <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
+          <!--</div>-->
+          <div class="col-md-2 text-white bg-dark rounded" style="padding: 20px">
+         <!--<div class="">-->
             <p> {{review.date.split("G")[0]}} </p>
+           <br/>
+           <br/>
+         <!--</div>-->
           </div>
         </div>
       </div>
