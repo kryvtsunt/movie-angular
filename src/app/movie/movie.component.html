@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <img *ngIf="!local" class="card-img" style="border: 10px solid rgb(240, 241, 242)" src="{{img}}{{movie.poster_path}}">
+          <img *ngIf="!local" class="card-img" style="border: 10px solid rgb(240, 241, 242)"
+               src="{{img}}{{movie.poster_path}}">
           <img *ngIf="local" class="card-img" src="{{localMovie.poster_path}}">
           <!--<div class="card-body">-->
 
@@ -21,12 +22,12 @@
             <div class="float-right hidden-md-up rounded"
                  style="background-color: rgb(240, 241, 242)">
               <div [(ngSwitch)]="bookmarked" class="text-center">
-                <i *ngSwitchCase="true" (click)="unbookmark()" class="btn text-warning fa fa-bookmark fa-lg"></i>
-                <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning fa fa-bookmark fa-lg"></i>
+                <i *ngSwitchCase="true" (click)="unbookmark()" class="btn text-warning fa fa-bookmark fa-2x"></i>
+                <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i>
               </div>
               <div [(ngSwitch)]="liked" class="text-center">
-                <i *ngSwitchCase="true" (click)="unlike()" class="btn text-danger fa fa-heart fa-lg"></i>
-                <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-lg"></i>
+                <i *ngSwitchCase="true" (click)="unlike()" class="btn text-danger fa fa-heart fa-2x"></i>
+                <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i>
               </div>
             </div>
           </div>
@@ -38,38 +39,46 @@
       </div>
 
       <div class="col-md-6 card card-header">
-        <div class="text-center shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 20px">
-          <h1>
-            {{movie.title}}
-          </h1>
+        <div>
+          <h6 class="float-left"><span class="text-danger">Grade: {{movie.vote_average}} </span>
+            <small>({{movie.vote_count}})</small>
+          </h6>
+          <h6 class="float-right">IMDB_ID<strong class="text-danger">{{' '+ movie.imdb_id}}</strong></h6>
         </div>
-        <div class="">
-
+        <div class="text-center shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 20px;">
+          <a href="{{movie.homepage}}"><h1 class="text-dark">
+            {{movie.title}}
+          </h1></a>
+          <h6 class="text-center rounded" style="background-color: rgb(233, 236, 239);"><em>«{{movie.tagline}}»</em>
+          </h6>
+          <small class="text-center"><em>{{movie.status}} <span
+            *ngIf="movie.release_date">at{{movie.release_date}}</span></em></small>
+        </div>
+        <h5 class=" btn-group d-flex justify-content-center"><span class="btn btn-danger disabled"*ngFor="let genre of movie.genres">  <strong>{{genre.name}}</strong></span>
+        </h5>
+        <br/>
+        <div class="row" style="padding-left: 50px">
+          <div class="col-4"><strong>Revenue: </strong>: <br/> {{movie.revenue}} $
+          </div>
+          <div class="col-4"><strong>Budget:</strong> <br/>{{movie.budget}} $
+          </div>
+          <div class="col-4"><strong>Runtime:</strong> <br/>{{movie.runtime}} min
+          </div>
+        </div>
+        <br/>
+        <div class="shadow-lg p-3 mb-5 rounded" style="background-color: rgb(233, 236, 239);">
           <h4>Movie Overview: </h4>
           <h6>
             {{movie.overview}}
           </h6>
         </div>
+        <span class="text-center"><h5>Production Companies: </h5>
+              <span class="btn btn-sm btn-light disabled" *ngFor="let company of movie.production_companies"> {{company.name}} </span>
+        </span>
+
       </div>
     </div>
-    <!--<div> Genres:-->
-    <!--<p *ngFor="let genre of movie.genres"> {{genre.name}} </p>-->
-    <!--</div>-->
 
-    <!--<div> Production Companies:-->
-    <!--<p *ngFor="let company of movie.production_companies"> {{company.name}} </p>-->
-    <!--</div>-->
-
-    <!--<div> Production Countries:-->
-    <!--<p *ngFor="let country of movie.production_countries"> {{country.name}} </p>-->
-    <!--</div>-->
-
-    <!--<div> Revenue: {{movie.revenue}}$-->
-    <!--</div>-->
-    <!--<div> Budget: {{movie.budget}}$-->
-    <!--</div>-->
-    <!--<div> Runtime: {{movie.runtime}}min-->
-    <!--</div>-->
 
     <!--<div> Status: {{movie.status}}-->
     <!--</div>-->
@@ -90,19 +99,17 @@
     <!--IMDB_ID {{movie.imdb_id}}-->
     <!--</div>-->
 
-    <!--<div> Tagline: <em>'{{movie.tagline}}'</em>-->
-    <!--</div>-->
 
     <br/>
     <div *ngIf="loggedIn" class="input-group" style="padding-left: 15px">
 
       <!--<div [(ngSwitch)]="liked">-->
-        <!--<button *ngSwitchCase="true" (click)="unlike()" class="btn btn-danger fas fa-heart"></button>-->
-        <!--<button *ngSwitchCase="false" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>-->
+      <!--<button *ngSwitchCase="true" (click)="unlike()" class="btn btn-danger fas fa-heart"></button>-->
+      <!--<button *ngSwitchCase="false" (click)="like()" class="btn btn-outline-danger fas fa-heart"></button>-->
       <!--</div>-->
       <!--<div [(ngSwitch)]="bookmarked">-->
-        <!--<button *ngSwitchCase="true" (click)="unbookmark()" class="btn btn-warning fa fa-bookmark"></button>-->
-        <!--<button *ngSwitchCase="false" (click)="bookmark()" class="btn btn-outline-warning fa fa-bookmark"></button>-->
+      <!--<button *ngSwitchCase="true" (click)="unbookmark()" class="btn btn-warning fa fa-bookmark"></button>-->
+      <!--<button *ngSwitchCase="false" (click)="bookmark()" class="btn btn-outline-warning fa fa-bookmark"></button>-->
       <!--</div>-->
 
 
