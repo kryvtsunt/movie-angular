@@ -7,7 +7,7 @@ const HOST = 'http://localhost:4000/';
 export class BookmarkServiceClient {
 
   bookmark(movie) {
-    return fetch(HOST + 'api/bookmark/movie/add', {
+    return fetch(HOST + 'api/bookmark/movie', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -18,10 +18,10 @@ export class BookmarkServiceClient {
   }
 
   unbookmark(movie) {
-    return fetch(HOST + 'api/bookmark/movie/remove', {
+    return fetch(HOST + 'api/bookmark/movie', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
-      method: 'post',
+      method: 'delete',
       headers: {
         'content-type': 'application/json'
       }

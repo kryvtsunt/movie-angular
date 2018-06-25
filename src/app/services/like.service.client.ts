@@ -9,7 +9,7 @@ const HOST = 'http://localhost:4000/';
 export class LikeServiceClient {
 
   like(movie) {
-    return fetch(HOST + 'api/like/movie/add', {
+    return fetch(HOST + 'api/like/movie', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -19,10 +19,10 @@ export class LikeServiceClient {
     })
   }
   unlike(movie) {
-    return fetch(HOST + 'api/like/movie/remove', {
+    return fetch(HOST + 'api/like/movie', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
-      method: 'post',
+      method: 'delete',
       headers: {
         'content-type': 'application/json'
       }

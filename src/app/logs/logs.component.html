@@ -3,7 +3,7 @@
   <h3>List of Activities</h3>
   <br/>
 
-  <table class="table">
+  <table class="table table-responsive-md">
     <thead class="thead-dark">
     <tr>
       <th scope="col">User Icon</th>
@@ -25,8 +25,12 @@
       <td *ngIf="activity.type === 'unbookmark'"><i class="far fa-bookmark fa-lg"></i></td>
       <td *ngIf="activity.type === 'review'"><i class="fa fa-comment fa-lg"></i></td>
       <td *ngIf="activity.type === 'delete review'"><i class="far fa-comment fa-lg"></i></td>
+      <td *ngIf="activity.type === 'follow'"><i class="fa fa-user fa-lg"></i></td>
+      <td *ngIf="activity.type === 'unfollow'"><i class="far fa-user fa-lg"></i></td>
 
-      <td>{{activity.movie.title}}</td>
+      <td *ngIf="activity.type !== 'follow' && activity.type !== 'unfollow'">{{activity.movie.title}}</td>
+      <td *ngIf="activity.type === 'follow' || activity.type === 'unfollow'">@{{activity.user2.username}}</td>
+
       <td>{{activity.date.split("T")[0]}}</td>
     </tr>
     </tbody>

@@ -46,13 +46,16 @@
           <h6 class="float-right">IMDB_ID<strong class="text-danger">{{' '+ movie.imdb_id}}</strong></h6>
         </div>
         <div class="text-center shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 20px;">
-          <a href="{{movie.homepage}}"><h1 class="text-dark">
+          <a *ngIf="!local" href="{{movie.homepage}}"><h1 class="text-dark">
             {{movie.title}}
+          </h1></a>
+          <a *ngIf="local" href="{{movie.homepage}}"><h1 class="text-dark">
+            {{localMovie.title}}
           </h1></a>
           <h6 class="text-center rounded" style="background-color: rgb(233, 236, 239);"><em>«{{movie.tagline}}»</em>
           </h6>
           <small class="text-center"><em>{{movie.status}} <span
-            *ngIf="movie.release_date">at{{movie.release_date}}</span></em></small>
+            *ngIf="movie.release_date"> on {{movie.release_date}}</span></em></small>
         </div>
         <h5 class=" btn-group d-flex justify-content-center"><span class="btn btn-danger disabled"*ngFor="let genre of movie.genres">  <strong>{{genre.name}}</strong></span>
         </h5>
@@ -68,8 +71,11 @@
         <br/>
         <div class="shadow-lg p-3 mb-5 rounded" style="background-color: rgb(233, 236, 239);">
           <h4>Movie Overview: </h4>
-          <h6>
+          <h6 *ngIf="!local">
             {{movie.overview}}
+          </h6>
+          <h6 *ngIf="local">
+            {{localMovie.overview}}
           </h6>
         </div>
         <span class="text-center"><h5>Production Companies: </h5>

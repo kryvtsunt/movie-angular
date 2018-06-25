@@ -103,12 +103,13 @@ export class MovieComponent implements OnInit {
   addReview() {
     this.reviewService.addReview(this.movie.id, this.review, this.movie)
       .then(() => {
+        this.review = '';
         this.findAllReviews();
       });
   }
 
   deleteReview(review) {
-    this.reviewService.deleteReview(this.localMovie._id, review)
+    this.reviewService.deleteReview(this.movie.id, review)
       .then(() => {
         this.findAllReviews();
       });
@@ -140,12 +141,11 @@ export class MovieComponent implements OnInit {
             return this.searchService.searchMoovieById(params.id)
           })
           .then(mov => {
-            this.local = false;
             this.movie = mov;
-            return this.checkStatus()
+            return this.checkStatus();
           })
           .then((res) => {
-              if (res){
+              if (res) {
                 return this.userService.profile();
               } else {
                 return new User();

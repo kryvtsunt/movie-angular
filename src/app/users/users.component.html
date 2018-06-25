@@ -8,7 +8,7 @@
   <button class="float-right btn btn-light fa-lg fa fa-th-list" (click)="switchMode()"></button>
   <h3>List of Users</h3>
   <br/>
-  <table class="table table-hover table-bordred table-striped" *ngIf="listMode">
+  <table class="table table-hover table-bordred table-striped table-responsive-md" *ngIf="listMode">
     <thead class="thead-dark">
     <th>Image</th>
     <th>Username</th>
@@ -109,9 +109,8 @@
         </p>
       </td>
     </tr>
-    <tr *ngFor="let user of users" routerLink= {{routerLink}}{{user.username}}>
-      <td *ngIf="admin" routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
-      <td *ngIf="!admin" routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
+    <tr *ngFor="let user of users">
+      <td routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
       <td>{{user.username}}</td>
       <td *ngIf="admin"> ********</td>
       <td>{{user.firstName}}</td>

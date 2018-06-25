@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     this.searchServie.findStories().then((response) => {
       console.log(response);
       this.stories = response.results;
-      this.stories.length = 12;
+      this.stories.length = 8;
     });
   }
 
