@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
       });
   }
   follow(userId){
-    this.followService.addFollowings(userId)
+    this.followService.addFollowing(userId)
       .then(response => console.log(response));
   }
 
