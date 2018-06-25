@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
   }
 
   advancedSearch() {
-    if (this.title.length > 0 && this.title[0] === '@') {
+    if (this.title.length > 0 && this.title[0] === '@' && this.loggedIn) {
       const username = this.title.substr(1);
       this.userService.findUserByUsername(username)
         .then((user) => {if (user !== null) {

@@ -11,36 +11,44 @@
 
     <div class="col-md-6 col-lg6">
       <div class="row">
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg}"(click)="user.img_path = boyImg">
-          <img class="card-img" src="{{boyImg}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg}"
+             (click)="user.img_path = boyImg">
+          <img class="card-img" src="{{boyImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong> BOY </strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg}"(click)="user.img_path = girlImg">
-          <img class="card-img" src="{{girlImg}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg}"
+             (click)="user.img_path = girlImg">
+          <img class="card-img" src="{{girlImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>GIRL</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg2}"(click)="user.img_path = boyImg2">
-          <img class="card-img" src="{{boyImg2}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === boyImg2}"
+             (click)="user.img_path = boyImg2">
+          <img class="card-img" src="{{boyImg2}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>TEEN B</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg2}"(click)="user.img_path = girlImg2">
-          <img class="card-img" src="{{girlImg2}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === girlImg2}"
+             (click)="user.img_path = girlImg2">
+          <img class="card-img" src="{{girlImg2}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>TEEN G</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === manImg}"(click)="user.img_path = manImg">
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === manImg}"
+             (click)="user.img_path = manImg">
           <img class="card-img" src="{{manImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>MAN</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === womanImg}"(click)="user.img_path = womanImg">
-          <img class="card-img" src="{{womanImg}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === womanImg}"
+             (click)="user.img_path = womanImg">
+          <img class="card-img" src="{{womanImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>WOMAN</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldmanImg}"(click)="user.img_path = oldmanImg">
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldmanImg}"
+             (click)="user.img_path = oldmanImg">
           <img class="card-img" src="{{oldmanImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>OLD M</strong></p>
         </div>
-        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldwomanImg}"(click)="user.img_path = oldwomanImg">
-          <img class="card-img" src="{{oldwomanImg}}"  alt="Smiley face" width="20px"/>
+        <div class="card col-3 btn btn-light" [ngClass]="{'active': user.img_path === oldwomanImg}"
+             (click)="user.img_path = oldwomanImg">
+          <img class="card-img" src="{{oldwomanImg}}" alt="Smiley face" width="20px"/>
           <p class="card-text"><strong>OLD W</strong></p>
         </div>
 
@@ -126,6 +134,11 @@
             style="margin-top: 10px">
       Update
     </button>
+    <button (click)="cancel()"
+            class="btn btn-danger btn-block "
+            style="margin-top: 10px">
+      Cancel
+    </button>
   </div>
 
   <div *ngIf="!edit" class="text-center container row">
@@ -154,32 +167,37 @@
   </div>
 
   <div style="margin-top: 10px" class="container">
-    <button *ngIf="!profile" class="btn btn-block btn-primary" routerLink="">Follow</button>
-    <button *ngIf="!admin && profile" class="btn btn-block btn-secondary" routerLink="">Home</button>
-    <button *ngIf="admin && profile" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
-    <button *ngIf="profile" class="btn btn-block btn-danger" (click)="logout()">Logout</button>
+    <button *ngIf="!profile && !edit" class="btn btn-block btn-primary" routerLink="">Follow</button>
+    <button *ngIf="!admin && profile && !edit" class="btn btn-block btn-secondary" routerLink="">Home</button>
+    <button *ngIf="!admin && profile && !edit" class="btn btn-block btn-primary" routerLink="/users">List of Users</button>
+    <button *ngIf="admin && profile && !edit" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
+    <button *ngIf="profile && !edit" class="btn btn-block btn-danger" (click)="logout()">Logout</button>
   </div>
   <br/>
 
-  <div  *ngIf="followings.length > 0" class="card-deck d-flex justify-content-center">
-    <div *ngFor="let u of followings">
-      <div *ngIf="true" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px">
-        <div class="btn">
-          <img class="card-img-top img-fluid bg-primary" src="{{u.following.img_path}}" alt="Card image">
-          <h4 class="card-title card-header ">@<strong>{{u.following.username}}</strong></h4>
-        </div>
-        <div class="card-body">
-          <h6 class="card-text">First Name: <em>{{u.following.firstName}}</em></h6>
-          <h6 class="card-text">Last Name: <em>{{u.following.lastName}}</em></h6>
+  <div *ngIf="followings.length > 0">
+    <h3 *ngIf="profile">Users You follow:</h3>
+    <h3 *ngIf="!profile">User's followings</h3>
+    <div class="card-deck d-flex justify-content-center">
+      <div *ngFor="let u of followings">
+        <div *ngIf="true" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px">
+          <div class="btn">
+            <img class="card-img-top img-fluid bg-primary" src="{{u.following.img_path}}" alt="Card image">
+            <h4 class="card-title card-header ">@<strong>{{u.following.username}}</strong></h4>
+          </div>
+          <div class="card-body">
+            <h6 class="card-text">First Name: <em>{{u.following.firstName}}</em></h6>
+            <h6 class="card-text">Last Name: <em>{{u.following.lastName}}</em></h6>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <div *ngIf="likedMovies.length > 0">
-    <h3 *ngIf="profile">Movies You liked:</h3>
-    <h3 *ngIf="!profile">Movies this User liked:</h3>
-    <ul class="list-group" *ngFor="let movie of likedMovies">
+    <h3 *ngIf="profile">Movies You lik:</h3>
+    <h3 *ngIf="!profile">Movies this User likes:</h3>
+    <ul class="list-group list-group-flush" *ngFor="let movie of likedMovies">
       <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
         <h5>{{movie.movie.title}}</h5>
       </li>
@@ -190,7 +208,7 @@
   <div *ngIf="bookmarkedMovies.length > 0">
     <h3 *ngIf="profile">Movies You bookmarked:</h3>
     <h3 *ngIf="!profile">Movies this User bookmarked:</h3>
-    <ul class="list-group" *ngFor="let movie of bookmarkedMovies">
+    <ul class="list-group list-group-flush" *ngFor="let movie of bookmarkedMovies">
       <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
         <h5>{{movie.movie.title}}</h5>
       </li>

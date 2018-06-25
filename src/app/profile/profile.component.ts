@@ -21,9 +21,10 @@ export class ProfileComponent implements OnInit {
   user: User = new User();
   profile: boolean;
   edit: boolean;
+  originalUser: User = new User();
   admin = false;
-  likedMovies =[];
-  bookmarkedMovies =[];
+  likedMovies = [];
+  bookmarkedMovies = [];
   followings = [];
   boyImg = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100'
   boyImg2 = 'http://webiconspng.com/wp-content/uploads/2016/11/avatar_business_costume_male_man_office_user_icon_403022.png'
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
         .then(user => {
           this.user = user;
           console.log(user);
+          this.edit = false;
         });
     });
   }
@@ -54,6 +56,12 @@ export class ProfileComponent implements OnInit {
     this.service.logout()
       .then(() =>
         this.router.navigate(['home']));
+  }
+  cancel(){
+    this.user = Object.assign({}, this.originalUser);
+    console.log(this.user);
+    console.log(this.originalUser)
+    this.edit = false;
   }
 
   findAllLikedMovies() {
@@ -86,7 +94,8 @@ export class ProfileComponent implements OnInit {
           this.service
             .profile()
             .then(user => {
-              this.user = user;
+              this.user = Object.assign({}, user);
+              this.originalUser = Object.assign({}, user);
               if (user.role === 'admin') {
                 this.admin = true;
               }
@@ -99,7 +108,8 @@ export class ProfileComponent implements OnInit {
           this.profile = false;
           this.service.findUserByUsername(params.username)
             .then(user => {
-              this.user = user;
+              this.user = Object.assign({}, user);
+              this.originalUser = Object.assign({}, user);
               if (user.role === 'admin') {
                 this.admin = true;
               }
