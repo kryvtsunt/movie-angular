@@ -35,6 +35,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  discoverHighestRatedR() {
+    this.title = 'Highest Rated R Movies';
+    this.searchServie.discoverHighestRatedR().then((response) => {
+      this.movies = response.results;
+      this.movies.length = 8;
+    });
+  }
+
+  discoverComedy() {
+    this.title = 'Most Popular Comedies';
+    this.searchServie.discoverMostPopularComedies().then((response) => {
+      this.movies = response.results;
+      this.movies[5] = this.movies[10];
+      this.movies.length = 8;
+    });
+  }
+
+  discoverFamily() {
+    this.title = 'Most Popular Family Movies';
+    this.searchServie.discoverMostPopularFamilyMovies().then((response) => {
+      this.movies = response.results;
+      this.movies.length = 8;
+    });
+  }
+
   findStroies() {
     this.searchServie.findStories().then((response) => {
       console.log(response);

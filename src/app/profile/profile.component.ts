@@ -26,6 +26,8 @@ export class ProfileComponent implements OnInit {
   likedMovies = [];
   bookmarkedMovies = [];
   followings = [];
+  follow: boolean;
+  routerLink: string
   boyImg = 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100'
   boyImg2 = 'http://webiconspng.com/wp-content/uploads/2016/11/avatar_business_costume_male_man_office_user_icon_403022.png'
   girlImg = 'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-girl-flat.png'
@@ -57,7 +59,8 @@ export class ProfileComponent implements OnInit {
       .then(() =>
         this.router.navigate(['home']));
   }
-  cancel(){
+
+  cancel() {
     this.user = Object.assign({}, this.originalUser);
     console.log(this.user);
     console.log(this.originalUser)
@@ -80,9 +83,33 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  findAllFollowings(){
-    this.followService.findAllFollowings()
-      .then((followings) => {console.log(followings); this.followings = followings})
+  findAllFollowings() {
+    this.followService.findAllFollowings(this.user._id)
+      .then((followings) => {
+        console.log(followings);
+        this.followings = followings
+      })
+  }
+
+  addFollowing() {
+    this.followService.addFollowing(this.user._id)
+      .then(() => this.checkFollowing());
+  }
+
+  removeFollowing() {
+    this.followService.removeFollowing(this.user._id)
+      .then(() => this.checkFollowing());
+  }
+
+  checkFollowing() {
+    this.followService.checkFollowing(this.user._id)
+      .then((follow) => {
+        if (follow === null) {
+          this.follow = false;
+        } else {
+          this.follow = true;
+        }
+      });
   }
 
   ngOnInit() {
@@ -99,21 +126,30 @@ export class ProfileComponent implements OnInit {
               if (user.role === 'admin') {
                 this.admin = true;
               }
+              this.routerLink = ''
               this.findAllLikedMovies();
               this.findAllBookmarkedMovies();
               this.findAllFollowings();
             });
 
         } else {
-          this.profile = false;
-          this.service.findUserByUsername(params.username)
+          this.service.profile()
             .then(user => {
-              this.user = Object.assign({}, user);
-              this.originalUser = Object.assign({}, user);
-              if (user.role === 'admin') {
-                this.admin = true;
+              if (params.username === user.username) {
+                this.router.navigate(['../../profile']);
+              } else {
+                this.service.findUserByUsername(params.username)
+                  .then(u => {
+                    this.profile = false;
+                    this.user = Object.assign({}, u);
+                    // this.originalUser = Object.assign({}, user);
+                    this.routerLink = '../';
+                    this.checkFollowing();
+                    this.findAllLikedMovies();
+                    this.findAllBookmarkedMovies();
+                    this.findAllFollowings();
+                  });
               }
-              this.findAllLikedMovies();
             });
         }
       });

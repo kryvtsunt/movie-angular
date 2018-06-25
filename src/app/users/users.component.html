@@ -141,14 +141,14 @@
   <div class="card-deck d-flex justify-content-center" *ngIf="!listMode">
     <div *ngFor="let u of users">
     <div *ngIf="true" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px">
-      <div class="btn">
-      <img class="card-img-top img-fluid bg-primary" src="{{u.img_path}}" alt="Card image">
+      <div class="btn" routerLink="{{routerLink}}{{u.username}}">
+      <img class="card-img-top img-fluid bg-light" src="{{u.img_path}}" alt="Card image">
         <h4 class="card-title card-header ">@<strong>{{u.username}}</strong></h4>
       </div>
       <div class="card-body">
         <h6 class="card-text">First Name: <em>{{u.firstName}}</em></h6>
         <h6 class="card-text">Last Name: <em>{{u.lastName}}</em></h6>
-        <button class="btn btn-block btn-sm btn-primary" (click)="follow(u._id)"> Follow</button>
+        <button class="btn btn-block btn-sm btn-primary" routerLink="{{routerLink}}{{u.username}}"> View Profile</button>
       </div>
     </div>
     </div>

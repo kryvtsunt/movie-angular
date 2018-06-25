@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.userService.logout()
       .then(() =>
-        this.router.navigate(['tk/home']));
+        this.router.navigate(['']));
   }
 
   advancedSearch() {

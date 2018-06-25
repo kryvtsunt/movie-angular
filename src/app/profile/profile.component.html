@@ -78,11 +78,11 @@
           <!--placeholder="username"-->
           <!--class="form-control"/>-->
           <!--</div></li>-->
-          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Username:</strong></h3>
+          <li class="list-group-item bg-light"><h3 class="float-left"><strong>Password:</strong></h3>
             <div class="float-right ">
               <input [(ngModel)]="user.password"
                      type="password"
-                     placeholder="username"
+                     placeholder="password"
                      class="form-control"/>
             </div>
           </li>
@@ -167,7 +167,8 @@
   </div>
 
   <div style="margin-top: 10px" class="container">
-    <button *ngIf="!profile && !edit" class="btn btn-block btn-primary" routerLink="">Follow</button>
+    <button *ngIf="!profile && !edit && !follow" class="btn btn-block btn-primary" (click)="addFollowing()">Follow</button>
+    <button *ngIf="!profile && !edit && follow" class="btn btn-block btn-danger" (click)="removeFollowing()">Unfollow</button>
     <button *ngIf="!admin && profile && !edit" class="btn btn-block btn-secondary" routerLink="">Home</button>
     <button *ngIf="!admin && profile && !edit" class="btn btn-block btn-primary" routerLink="/users">List of Users</button>
     <button *ngIf="admin && profile && !edit" class="btn btn-block btn-secondary" routerLink="/admin">Administration</button>
@@ -181,13 +182,14 @@
     <div class="card-deck d-flex justify-content-center">
       <div *ngFor="let u of followings">
         <div *ngIf="true" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 14rem; margin:20px">
-          <div class="btn">
-            <img class="card-img-top img-fluid bg-primary" src="{{u.following.img_path}}" alt="Card image">
+          <div class="btn" routerLink="{{routerLink}}../user/{{u.following.username}}">
+            <img class="card-img-top img-fluid bg-light" src="{{u.following.img_path}}" alt="Card image">
             <h4 class="card-title card-header ">@<strong>{{u.following.username}}</strong></h4>
           </div>
           <div class="card-body">
             <h6 class="card-text">First Name: <em>{{u.following.firstName}}</em></h6>
             <h6 class="card-text">Last Name: <em>{{u.following.lastName}}</em></h6>
+            <button class="btn btn-block btn-sm btn-primary" routerLink="{{routerLink}}../user/{{u.following.username}}"> View Profile</button>
           </div>
         </div>
       </div>
@@ -195,10 +197,10 @@
   </div>
 
   <div *ngIf="likedMovies.length > 0">
-    <h3 *ngIf="profile">Movies You lik:</h3>
+    <h3 *ngIf="profile">Movies You like:</h3>
     <h3 *ngIf="!profile">Movies this User likes:</h3>
     <ul class="list-group list-group-flush" *ngFor="let movie of likedMovies">
-      <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
+      <li class="list-group-item list-group-item-action" routerLink="{{routerLink}}../movie/{{movie.movie.id}}">
         <h5>{{movie.movie.title}}</h5>
       </li>
     </ul>
@@ -209,7 +211,7 @@
     <h3 *ngIf="profile">Movies You bookmarked:</h3>
     <h3 *ngIf="!profile">Movies this User bookmarked:</h3>
     <ul class="list-group list-group-flush" *ngFor="let movie of bookmarkedMovies">
-      <li class="list-group-item list-group-item-action" routerLink="../movie/{{movie.movie.id}}">
+      <li class="list-group-item list-group-item-action" routerLink="{{routerLink}}../movie/{{movie.movie.id}}">
         <h5>{{movie.movie.title}}</h5>
       </li>
     </ul>

@@ -95,7 +95,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     if (this.router.url === '/users') {
       this.listMode = false
-      this.routerLink = '/../user/';
+      this.routerLink = '../user/';
     } else {
       this.listMode = true
       this.routerLink = '../../user/';
