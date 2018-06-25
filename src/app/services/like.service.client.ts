@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+
+const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class LikeServiceClient {
 
   like(movie) {
-    return fetch('http://localhost:4000/api/like/movie/add', {
+    return fetch(HOST + 'api/like/movie/add', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -17,7 +19,7 @@ export class LikeServiceClient {
     })
   }
   unlike(movie) {
-    return fetch('http://localhost:4000/api/like/movie/remove', {
+    return fetch(HOST + 'api/like/movie/remove', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -28,7 +30,7 @@ export class LikeServiceClient {
   }
 
   checkLike(movieId) {
-    return fetch('http://localhost:4000/api/like/movie/' + movieId + '/check', {
+    return fetch(HOST + 'api/like/movie/' + movieId + '/check', {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
       headers: {
@@ -39,7 +41,7 @@ export class LikeServiceClient {
   }
 
   findAllLikedMovies(userId) {
-    return fetch('http://localhost:4000/api/like/user/' + userId + '/movie/', {
+    return fetch(HOST + 'api/like/user/' + userId + '/movie/', {
       method: 'get',
     })
       .then (response => response.json());

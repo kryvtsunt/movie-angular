@@ -1,6 +1,4 @@
-// const HOST = 'https://tk-course-management-nodejs.herokuapp.com/';
-
-
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
 
 const HOST = 'http://localhost:4000/';
 

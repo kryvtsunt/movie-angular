@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'http://localhost:4000/';
+
 @Injectable()
 export class BookmarkServiceClient {
 
   bookmark(movie) {
-    return fetch('http://localhost:4000/api/bookmark/movie/add', {
+    return fetch(HOST + 'api/bookmark/movie/add', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -15,7 +18,7 @@ export class BookmarkServiceClient {
   }
 
   unbookmark(movie) {
-    return fetch('http://localhost:4000/api/bookmark/movie/remove', {
+    return fetch(HOST + 'api/bookmark/movie/remove', {
       body: JSON.stringify(movie),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -26,7 +29,7 @@ export class BookmarkServiceClient {
   }
 
   checkBookmark(movieId) {
-    return fetch('http://localhost:4000/api/bookmark/movie/' + movieId + '/check', {
+    return fetch(HOST + 'api/bookmark/movie/' + movieId + '/check', {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
       headers: {
@@ -37,7 +40,7 @@ export class BookmarkServiceClient {
   }
 
   findAllBookmarkedMovies(userId) {
-    return fetch('http://localhost:4000/api/bookmark/user/' + userId + '/movie/', {
+    return fetch(HOST + 'api/bookmark/user/' + userId + '/movie/', {
       method: 'get',
     })
       .then (response => response.json());

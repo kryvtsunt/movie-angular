@@ -6,10 +6,10 @@
   <div class="card-deck d-flex justify-content-center">
     <div *ngFor="let mov of movies">
       <div class="card h-100 shadow-lg p-3 mb-5 bg-white rounded" style="width: 20rem" *ngIf="movie.id !== mov.id">
-        <img *ngIf="mov.poster_path !== null" class="card-img-top img-fluid" src="{{mov.poster_path}}">
-        <img *ngIf="mov.poster_path === null" class="card-img-top img-fluid "
+        <img *ngIf="mov.poster_path !== null" routerLink="../../movie/{{mov.id}}" class="card-img-top img-fluid" src="{{mov.poster_path}}">
+        <img *ngIf="mov.poster_path === null" routerLink="../../movie/{{mov.id}}" class="card-img-top img-fluid "
              src="http://a-movies.info/public/img/no_poster.jpg">
-        <div class="card-header"> <h4 class="card-title">{{mov.title}}</h4></div>
+        <div class="card-header btn" routerLink="../../movie/{{mov.id}}"> <h4 class="card-title">{{mov.title.substring(0,16)}}</h4></div>
         <div class="card-body" >
           <p class="card-text">{{mov.overview.substring(0, 100)+'..'}}</p>
           <p class="card-text">
@@ -22,7 +22,7 @@
           <div class="float-right">
             <i class="fa fa fa-heart" aria-hidden="true"
                style="margin-top: 5px; margin-right: 10px;">{{mov.likes}}</i>
-            <i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.likes}}</i>
+            <i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.reviews}}</i>
           </div>
         </div>
       </div>

@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'http://localhost:4000/';
+
 @Injectable()
 export class FollowServiceClient {
 
 
   addFollowing(userId) {
-    return fetch('http://localhost:4000/api/follow/following/' + userId, {
+    return fetch(HOST + 'api/follow/following/' + userId, {
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
       headers: {
@@ -18,7 +21,7 @@ export class FollowServiceClient {
   }
 
   removeFollowing(userId) {
-    return fetch('http://localhost:4000/api/follow/following/' + userId, {
+    return fetch(HOST + 'api/follow/following/' + userId, {
       credentials: 'include', // include, same-origin, *omit
       method: 'delete',
       headers: {
@@ -31,7 +34,7 @@ export class FollowServiceClient {
   }
 
   checkFollowing(userId) {
-    return fetch('http://localhost:4000/api/follow/following/' + userId, {
+    return fetch(HOST + 'api/follow/following/' + userId, {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
     })
@@ -49,7 +52,7 @@ export class FollowServiceClient {
   }
 
   findAllFollowers(userId) {
-    return fetch('http://localhost:4000/api/follow/user/' + userId + '/follower', {
+    return fetch(HOST + 'api/follow/user/' + userId + '/follower', {
 
     })
       .then(response => {

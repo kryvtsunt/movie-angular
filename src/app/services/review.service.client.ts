@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
+
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class ReviewServiceClient {
   addReview(movieId, com, mov) {
     const review = {review: com, movie: mov}
-    return fetch('http://localhost:4000/api/review/movie/' + movieId + '/add', {
+    return fetch(HOST + 'api/review/movie/' + movieId + '/add', {
       body: JSON.stringify(review),
-      credentials: 'include', // include, same-origin, *omit
+      credentials: 'include',
       method: 'post',
       headers: {
         'content-type': 'application/json'
@@ -18,8 +18,8 @@ export class ReviewServiceClient {
   }
 
   findAllReviews(movieId) {
-    return fetch('http://localhost:4000/api/review/movie/' + movieId + '/find', {
-      credentials: 'include', // include, same-origin, *omit
+    return fetch(HOST + 'api/review/movie/' + movieId + '/find', {
+      credentials: 'include',
     }). then((response) => response.json())
   }
 }
