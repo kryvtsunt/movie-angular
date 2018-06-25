@@ -24,6 +24,7 @@
       <td *ngIf="activity.type === 'bookmark'"><i class="fa fa-bookmark fa-lg"></i></td>
       <td *ngIf="activity.type === 'unbookmark'"><i class="far fa-bookmark fa-lg"></i></td>
       <td *ngIf="activity.type === 'review'"><i class="fa fa-comment fa-lg"></i></td>
+      <td *ngIf="activity.type === 'delete review'"><i class="far fa-comment fa-lg"></i></td>
 
       <td>{{activity.movie.title}}</td>
       <td>{{activity.date.split("T")[0]}}</td>

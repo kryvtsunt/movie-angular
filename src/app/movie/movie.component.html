@@ -134,7 +134,7 @@
             <!--</div>-->
           </div>
           <div class="col-md-8 bg-light" style="padding: 0px 0px;">
-            <div class="float-right hidden-md-up rounded" ><i class="btn text-danger fa-lg fa fa-times"></i></div>
+            <div *ngIf="review.user._id === user._id" (click)="deleteReview(review.review)" class="float-right hidden-md-up rounded" ><i class="btn text-danger fa-lg fa fa-times"></i></div>
             <br/>
             <h5 style="margin: 20px"> {{review.review}} </h5>
             <br/>

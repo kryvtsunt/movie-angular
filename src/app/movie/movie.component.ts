@@ -8,6 +8,7 @@ import {ReviewServiceClient} from '../services/review.service.client';
 import {MovieServiceClient} from '../services/movie.service.client';
 import {LikeServiceClient} from '../services/like.service.client';
 import {BookmarkServiceClient} from '../services/bookmark.service.client';
+import {User} from "../models/user.model.client";
 
 @Component({
   selector: 'app-movie',
@@ -18,6 +19,7 @@ export class MovieComponent implements OnInit {
 
   movie: Movie
   review: String
+  user: User
   reviews: [Review];
   img = 'https://image.tmdb.org/t/p/w500/';
   loggedIn: boolean;
@@ -105,13 +107,20 @@ export class MovieComponent implements OnInit {
       });
   }
 
+  deleteReview(review) {
+    this.reviewService.deleteReview(this.localMovie._id, review)
+      .then(() => {
+        this.findAllReviews();
+      });
+  }
+
   setup() {
     this.checkStatus()
       .then((res) => {
         if (res) {
           this.checkLike();
           this.checkBookmark();
-          this.countLikes();
+          // this.countLikes();
         }
       });
     this.findAllReviews();
@@ -133,8 +142,21 @@ export class MovieComponent implements OnInit {
           .then(mov => {
             this.local = false;
             this.movie = mov;
-            console.log(mov);
+            return this.checkStatus()
           })
+          .then((res) => {
+              if (res){
+                return this.userService.profile();
+              } else {
+                return new User();
+              }
+            }
+          )
+          .then((user) => {
+              this.user = user;
+              console.log(user);
+            }
+          )
           .then(() => {
             {
               this.setup();
