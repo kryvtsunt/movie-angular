@@ -1,20 +1,17 @@
-<div class="row">
-
-  <div class="container-fluid">
-    <label>Movie Title</label>
+<div class="container">
+<br/>
     <input [(ngModel)]="title" class="form-control"/>
-    <button (click)="searchMovie(title)" class="btn btn-block btn-primary"> Search</button>
+    <button (click)="searchMovie()" class="btn btn-block btn-dark"> Search</button>
 
-  </div>
-  <div class="col-6">
-    <div class="container-fluid">
-      <h1> OMDB API</h1>
+  <div class="row" *ngIf="result && result2">
+    <div class="col-6">
+      <h2 class="text-center"> OMDB API</h2>
 
-      <ul class="list-group">
+      <ul class="list-group" >
         <li class="list-group-item" *ngFor="let movie of result.Search">
           <div class="row">
             <div class="col-8">
-              {{movie.Title}}
+             <h3> {{movie.Title}}</h3>
             </div>
             <div class="col-4">
               <img src={{movie.Poster}} width="100">
@@ -23,16 +20,14 @@
         </li>
       </ul>
     </div>
-  </div>
-  <div class="col-6">
+    <div class="col-6">
 
-    <div class="container-fluid">
-      <h1> TMDB API</h1>
+      <h2 class="text-center"> TMDB API</h2>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let movie of result2.results">
           <div class="row">
             <div class="col-8">
-              {{movie.title}}
+             <h3>{{movie.title}}</h3>
             </div>
             <div class="col-4">
               <img src="{{img}}{{movie.poster_path}}" width="100">

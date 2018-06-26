@@ -13,22 +13,23 @@ export class OmdbTestComponent implements OnInit {
   title: String;
   result: Object;
   result2: Object
-  // img: String;
   img = 'https://image.tmdb.org/t/p/w500/';
   constructor(private omdbService: OmdbServiceClient) { }
 
-  searchMovie(title: String) {
-    this.omdbService.searchMovieByTitle(title).subscribe((result) => {
-      console.log(result);
+  searchMovie() {
+    this.omdbService.searchMovieByTitle(this.title)
+      .then((result) => {
        this.result = result;
     });
-    this.omdbService.searchMovieByTitle2(title).subscribe((result) => {
-      console.log(result);
+    this.omdbService.searchMovieByTitle2(this.title)
+      .then((result) => {
       this.result2 = result;
+
     });
   }
 
   ngOnInit() {
+    this.title = '';
   }
 
 }
