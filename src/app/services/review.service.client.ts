@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
-const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
-// const HOST = 'http://localhost:4000/';
+// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class ReviewServiceClient {
@@ -17,11 +17,10 @@ export class ReviewServiceClient {
     })
   }
 
-  deleteReview(movieId, rev) {
+  deleteReview(movieId, userId, rev) {
     const review = {review: rev}
-    return fetch(HOST + 'api/review/movie/' + movieId, {
+    return fetch(HOST + 'api/review/movie/' + movieId + '/user/' + userId, {
       body: JSON.stringify(review),
-      credentials: 'include',
       method: 'delete',
       headers: {
         'content-type': 'application/json'

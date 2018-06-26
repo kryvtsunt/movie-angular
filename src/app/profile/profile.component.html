@@ -176,7 +176,7 @@
   </div>
   <br/>
 
-  <div *ngIf="followings.length > 0">
+  <div *ngIf="followings && followings.length > 0">
     <h3 *ngIf="profile">Users You follow:</h3>
     <h3 *ngIf="!profile">User's followings</h3>
     <div class="card-deck d-flex justify-content-center">
@@ -196,7 +196,7 @@
     </div>
   </div>
 
-  <div *ngIf="likedMovies.length > 0">
+  <div *ngIf="likedMovies && likedMovies.length > 0">
     <h3 *ngIf="profile">Movies You like:</h3>
     <h3 *ngIf="!profile">Movies this User likes:</h3>
     <ul class="list-group list-group-flush" *ngFor="let movie of likedMovies">
@@ -206,8 +206,7 @@
     </ul>
   </div>
   <br/>
-
-  <div *ngIf="bookmarkedMovies.length > 0">
+  <div *ngIf="((profile || admin || follow) && bookmarkedMovies && (bookmarkedMovies.length > 0))">
     <h3 *ngIf="profile">Movies You bookmarked:</h3>
     <h3 *ngIf="!profile">Movies this User bookmarked:</h3>
     <ul class="list-group list-group-flush" *ngFor="let movie of bookmarkedMovies">

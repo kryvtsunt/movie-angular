@@ -25,8 +25,9 @@ export class MovieComponent implements OnInit {
   loggedIn: boolean;
   liked: boolean;
   bookmarked: boolean;
-  numberOfLikes: number;
+  // numberOfLikes: number;
   local: boolean
+  admin: boolean;
   localMovie: Movie
   likedUsers: [User]
 
@@ -107,8 +108,8 @@ export class MovieComponent implements OnInit {
       });
   }
 
-  deleteReview(review) {
-    this.reviewService.deleteReview(this.movie.id, review)
+  deleteReview(review, userId) {
+    this.reviewService.deleteReview(this.movie.id, userId, review)
       .then(() => {
         this.findAllReviews();
       });
@@ -153,7 +154,11 @@ export class MovieComponent implements OnInit {
           )
           .then((user) => {
               this.user = user;
-              console.log(user);
+            if (user.role === 'admin') {
+              this.admin = true;
+            } else {
+              this.admin = false;
+            }
             }
           )
           .then(() => {

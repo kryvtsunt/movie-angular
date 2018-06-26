@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   profile: boolean;
   edit: boolean;
   originalUser: User = new User();
-  admin = false;
+  admin: boolean;
   likedMovies = [];
   bookmarkedMovies = [];
   followings = [];
@@ -125,6 +125,8 @@ export class ProfileComponent implements OnInit {
               this.originalUser = Object.assign({}, user);
               if (user.role === 'admin') {
                 this.admin = true;
+              } else {
+                this.admin = false;
               }
               this.routerLink = ''
               this.findAllLikedMovies();
@@ -142,7 +144,11 @@ export class ProfileComponent implements OnInit {
                   .then(u => {
                     this.profile = false;
                     this.user = Object.assign({}, u);
-                    // this.originalUser = Object.assign({}, user);
+                    if (user.role === 'admin') {
+                      this.admin = true;
+                    } else {
+                      this.admin = false;
+                    }
                     this.routerLink = '../';
                     this.checkFollowing();
                     this.findAllLikedMovies();

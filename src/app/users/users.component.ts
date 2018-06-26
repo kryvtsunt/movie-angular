@@ -36,10 +36,10 @@ export class UsersComponent implements OnInit {
   createUser() {
     console.log(this.user)
     if (this.user.username === undefined) {
-      this.user.username = ('User' + this.index);
+      this.user.username = ('user' + this.index);
     }
     if (this.user.password === undefined) {
-      this.user.password = ('User' + this.index);
+      this.user.password = ('user' + this.index);
     }
     console.log(this.user)
     this.userService.createUser(this.user)
