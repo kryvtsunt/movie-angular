@@ -111,7 +111,7 @@
     </tr>
     <tr *ngFor="let user of users">
       <td routerLink={{routerLink}}{{user.username}} class="btn" ><img src="{{user.img_path}}" width="50px" ></td>
-      <td>{{user.username}}</td>
+      <td>@{{user.username}}</td>
       <td *ngIf="admin"> ********</td>
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>

@@ -30,7 +30,7 @@ export class LikeServiceClient {
   }
 
   checkLike(movieId) {
-    return fetch(HOST + 'api/like/movie/' + movieId + '/check', {
+    return fetch(HOST + 'api/like/movie/' + movieId , {
       credentials: 'include', // include, same-origin, *omit
       method: 'get',
       headers: {
@@ -45,5 +45,17 @@ export class LikeServiceClient {
       method: 'get',
     })
       .then (response => response.json());
+  }
+
+  findUsersWhoLikedMovie(movieId) {
+    return fetch(HOST + 'api/like/movie/' + movieId + '/user/', {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json();
+      });
   }
 }

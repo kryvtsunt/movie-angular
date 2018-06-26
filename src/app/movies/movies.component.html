@@ -21,13 +21,12 @@
           <div class="card-footer">
             <div class="btn-group">
               <button class="btn btn-sm btn-dark float-left" (click)="editMovie(mov)"> Press to edit</button>
-              <button class="btn btn-danger fa fa fa-times float-left" (click)="deleteMovie(mov._id)"></button>
+              <button class="btn btn-danger fa fa fa-trash float-left" (click)="deleteMovie(mov._id)"></button>
             </div>
-            <div class="float-right">
-              <i class="fa fa fa-lg fa-heart" aria-hidden="true"
-                 style="margin-top: 8px; margin-right: 15px;">{{mov.likes}}</i>
+            <!--<div class="float-right">-->
+              <!--<i class="fa fa fa-lg fa-heart" aria-hidden="true" style="margin-top: 8px; margin-right: 15px;">{{mov.likes}}</i>-->
               <!--<i class="fa fa fa-lg fa-comment" aria-hidden="true" style="margin-top: 8px">{{mov.reviews}}</i>-->
-            </div>
+            <!--</div>-->
           </div>
         </div>
         <div class="card h-100" style="width: 20rem;" *ngIf="movie.id === mov.id">
@@ -47,17 +46,19 @@
                       placeholder="Overview"
                       class="form-control"></textarea>
             <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">This movie is in you DB now</small>
             </p>
           </div>
           <div class="card-footer">
+            <div class="btn-group">
             <button class="btn btn-sm btn-dark float-left" (click)="updateMovie(mov)"> Save</button>
             <button class="btn btn-sm btn-danger float-left" (click)="cleanData()"> Cancel</button>
-            <div class="float-right">
-              <i class="fa fa fa-heart" aria-hidden="true"
-                 style="margin-top: 5px; margin-right: 10px;">{{mov.likes}}</i>
-              <i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.likes}}</i>
             </div>
+            <!--<div class="float-right">-->
+              <!--<i class="fa fa fa-heart" aria-hidden="true"-->
+                 <!--style="margin-top: 5px; margin-right: 10px;">{{mov.likes}}</i>-->
+              <!--<i class="fa fa fa-comment" aria-hidden="true" style="margin-top: 5px">{{mov.likes}}</i>-->
+            <!--</div>-->
           </div>
         </div>
       </div>

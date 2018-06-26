@@ -8,7 +8,7 @@ import {ReviewServiceClient} from '../services/review.service.client';
 import {MovieServiceClient} from '../services/movie.service.client';
 import {LikeServiceClient} from '../services/like.service.client';
 import {BookmarkServiceClient} from '../services/bookmark.service.client';
-import {User} from "../models/user.model.client";
+import {User} from '../models/user.model.client';
 
 @Component({
   selector: 'app-movie',
@@ -28,6 +28,7 @@ export class MovieComponent implements OnInit {
   numberOfLikes: number;
   local: boolean
   localMovie: Movie
+  likedUsers: [User]
 
   constructor(private bookmarkService: BookmarkServiceClient, private likeService: LikeServiceClient,
               private movieService: MovieServiceClient, private reviewService: ReviewServiceClient,
@@ -50,7 +51,7 @@ export class MovieComponent implements OnInit {
     this.likeService.like(this.movie)
       .then(() => {
         this.checkLike();
-        this.countLikes();
+        this.findUsersWhoLikedMovie();
       });
   }
 
@@ -58,7 +59,7 @@ export class MovieComponent implements OnInit {
     this.likeService.unlike(this.movie)
       .then(() => {
         this.checkLike();
-        this.countLikes();
+        this.findUsersWhoLikedMovie();
       });
   }
 
@@ -90,14 +91,12 @@ export class MovieComponent implements OnInit {
       });
   }
 
-  countLikes() {
-    this.movieService.findMovie(this.movie.id).then((movie) => {
-      if (movie === null) {
-        this.numberOfLikes = 0;
-      } else {
-        this.numberOfLikes = movie.likes;
-      }
-    });
+  findUsersWhoLikedMovie() {
+    if (this.local) {
+      this.likeService.findUsersWhoLikedMovie(this.localMovie._id).then((likes) => {
+        this.likedUsers = likes;
+      });
+    }
   }
 
   addReview() {
@@ -121,7 +120,7 @@ export class MovieComponent implements OnInit {
         if (res) {
           this.checkLike();
           this.checkBookmark();
-          // this.countLikes();
+          this.findUsersWhoLikedMovie();
         }
       });
     this.findAllReviews();

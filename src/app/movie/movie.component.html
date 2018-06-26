@@ -6,7 +6,8 @@
         <div class="card">
           <img *ngIf="!local" class="card-img" style="border: 10px solid rgb(240, 241, 242)"
                src="{{img}}{{movie.poster_path}}">
-          <img *ngIf="local" class="card-img" src="{{localMovie.poster_path}}">
+          <img *ngIf="local" class="card-img" style="border: 10px solid rgb(240, 241, 242)"
+               src="{{localMovie.poster_path}}">
           <!--<div class="card-body">-->
 
           <!--</div>-->
@@ -18,7 +19,7 @@
           <!--<div class="float-right hidden-md-up">-->
           <!--<button type="button" class="btn btn-dark btn-sm" data-toggle="offcanvas" (click)="adsOn = false">Close</button>-->
           <!--</div>-->
-          <div class="card-img-overlay" style="padding:0px;">
+          <div *ngIf="loggedIn" class="card-img-overlay" style="padding:0px;">
             <div class="float-right hidden-md-up rounded"
                  style="background-color: rgb(240, 241, 242)">
               <div [(ngSwitch)]="bookmarked" class="text-center">
@@ -35,6 +36,15 @@
           <!--<p> Likes: {{numberOfLikes}}</p>-->
           <!--<p> Bokmarks: {{numberOfLikes}}</p>-->
 
+          <div *ngIf="loggedIn && local && likedUsers.length > 0" class="card-footer">
+            <h5><strong><i class="fa fa-heart text-danger"></i> Liked by: </strong></h5>
+            <span *ngFor="let likedUser of likedUsers">
+              <span class="btn btn-sm">
+              <img class="d-flex justify-content-start" src="{{likedUser.user.img_path}}" width="50px">
+              <strong class="float-left">@{{likedUser.user.username}}</strong>
+              </span>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -55,9 +65,10 @@
           <h6 class="text-center rounded" style="background-color: rgb(233, 236, 239);"><em>«{{movie.tagline}}»</em>
           </h6>
           <small class="text-center"><em>{{movie.status}} <span
-            *ngIf="movie.release_date"> on {{movie.release_date}}</span></em></small>
+            *ngIf="movie.release_date"> _ {{movie.release_date}}</span></em></small>
         </div>
-        <h5 class=" btn-group d-flex justify-content-center"><span class="btn btn-danger disabled"*ngFor="let genre of movie.genres">  <strong>{{genre.name}}</strong></span>
+        <h5 class=" btn-group d-flex justify-content-center"><span class="btn btn-danger disabled"
+                                                                   *ngFor="let genre of movie.genres">  <strong>{{genre.name}}</strong></span>
         </h5>
         <br/>
         <div class="row" style="padding-left: 50px">
@@ -128,33 +139,34 @@
 
     <br/>
 
-    <div *ngIf="reviews">
+    <div *ngIf="loggedIn && reviews && reviews.length > 0">
       <h2> Reviews </h2>
       <div *ngFor="let review of reviews">
         <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
 
-          <div class="col-md-2 rounded "  style="padding: 20px" >
+          <div class="col-md-2 rounded " style="padding: 20px">
             <!--<div class="">-->
             <img src="{{review.user.img_path}}" width="80px">
             <h5>{{review.user.username}}</h5>
             <!--</div>-->
           </div>
           <div class="col-md-8 bg-light" style="padding: 0px 0px;">
-            <div *ngIf="review.user._id === user._id" (click)="deleteReview(review.review)" class="float-right hidden-md-up rounded" ><i class="btn text-danger fa-lg fa fa-times"></i></div>
+            <div *ngIf="review.user._id === user._id" (click)="deleteReview(review.review)"
+                 class="float-right hidden-md-up rounded"><i class="btn text-danger fa-lg fa fa-times"></i></div>
             <br/>
             <h5 style="margin: 20px"> {{review.review}} </h5>
             <br/>
             <br/>
           </div>
           <!--<div class="col-md-1">-->
-            <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
+          <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
           <!--</div>-->
           <div class="col-md-2 rounded" style="padding: 20px">
-         <!--<div class="">-->
-            <h6> <em>{{review.date.split("G")[0]}}</em> </h6>
-           <br/>
-           <br/>
-         <!--</div>-->
+            <!--<div class="">-->
+            <h6><em>{{review.date.split("G")[0]}}</em></h6>
+            <br/>
+            <br/>
+            <!--</div>-->
           </div>
         </div>
       </div>
@@ -166,6 +178,7 @@
     <br/>
     <br/>
     <br/>
+    <hr/>
     <br/>
     <br/>
   </div>
