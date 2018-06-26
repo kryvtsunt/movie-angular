@@ -1,6 +1,6 @@
-// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
 
-const HOST = 'http://localhost:4000/';
+// const HOST = 'http://localhost:4000/';
 
 import {User} from '../models/user.model.client';
 

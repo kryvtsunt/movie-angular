@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-// const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
+const HOST = 'https://tk-movie-nodejs.herokuapp.com/';
 
-const HOST = 'http://localhost:4000/';
+// const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class LikeServiceClient {

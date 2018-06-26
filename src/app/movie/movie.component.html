@@ -36,7 +36,7 @@
           <!--<p> Likes: {{numberOfLikes}}</p>-->
           <!--<p> Bokmarks: {{numberOfLikes}}</p>-->
 
-          <div *ngIf="loggedIn && local && likedUsers.length > 0" class="card-footer">
+          <div *ngIf="loggedIn && local && likedUsers && likedUsers.length > 0" class="card-footer">
             <h5><strong><i class="fa fa-heart text-danger"></i> Liked by: </strong></h5>
             <span *ngFor="let likedUser of likedUsers">
               <span class="btn btn-sm">
@@ -72,7 +72,7 @@
         </h5>
         <br/>
         <div class="row" style="padding-left: 50px">
-          <div class="col-4"><strong>Revenue: </strong>: <br/> {{movie.revenue}} $
+          <div class="col-4"><strong>Revenue: </strong> <br/> {{movie.revenue}} $
           </div>
           <div class="col-4"><strong>Budget:</strong> <br/>{{movie.budget}} $
           </div>
@@ -140,7 +140,7 @@
     <br/>
 
     <div *ngIf="loggedIn && reviews && reviews.length > 0">
-      <h2> Reviews </h2>
+      <h2 style="margin-bottom: 15px"> Reviews </h2>
       <div *ngFor="let review of reviews">
         <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
 

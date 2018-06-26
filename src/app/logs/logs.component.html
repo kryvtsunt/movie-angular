@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <br/>
-  <h3>List of Activities</h3>
+  <h3>List of Actions</h3>
   <br/>
 
   <table class="table table-responsive-md">
@@ -8,8 +8,8 @@
     <tr>
       <th scope="col">User Icon</th>
       <th scope="col">User</th>
-      <th scope="col">Activity</th>
-      <th scope="col">Activity Icon</th>
+      <th scope="col">Action</th>
+      <th scope="col">Action Icon</th>
       <th scope="col">Movie/User</th>
       <th scope="col">Date</th>
     </tr>
@@ -23,7 +23,7 @@
       <td *ngIf="activity.type === 'unlike'"><i class="far fa-heart fa-lg"></i></td>
       <td *ngIf="activity.type === 'bookmark'"><i class="fa fa-bookmark fa-lg"></i></td>
       <td *ngIf="activity.type === 'unbookmark'"><i class="far fa-bookmark fa-lg"></i></td>
-      <td *ngIf="activity.type === 'review'"><i class="fa fa-comment fa-lg"></i></td>
+      <td *ngIf="activity.type === 'add review'"><i class="fa fa-comment fa-lg"></i></td>
       <td *ngIf="activity.type === 'delete review'"><i class="far fa-comment fa-lg"></i></td>
       <td *ngIf="activity.type === 'follow'"><i class="fa fa-user fa-lg"></i></td>
       <td *ngIf="activity.type === 'unfollow'"><i class="far fa-user fa-lg"></i></td>

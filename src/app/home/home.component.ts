@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     this.title = 'Most Popular Movies'
     this.searchServie.discoverPopularMovies().then((response) => {
       this.movies = response.results;
+      this.movies[5] = this.movies[10];
       this.movies.length = 8;
     });
   }
