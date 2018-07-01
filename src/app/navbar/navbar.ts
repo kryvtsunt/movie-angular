@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.searchBardMode = 3;
       this.results = null;
-      this.router.navigate(['search', {title: 'aba'}]);
+      this.router.navigate(['search']);
       this.title = '';
     }
   }
