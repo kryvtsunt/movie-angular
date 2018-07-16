@@ -206,8 +206,8 @@
     <!--</div>-->
 
     <div class="col-md-4">
-      <h5 class="btn btn-block btn-lg" routerLink="/users"><strong><i class="fa fa-users fa-lg text-info"></i> Followings </strong></h5>
       <div *ngIf="(profile || admin || follow) && !edit">
+      <h5 class="btn btn-block btn-lg" routerLink="/users"><strong><i class="fa fa-users fa-lg text-info"></i> Followings </strong></h5>
       <span *ngFor="let u of followings">
               <span class="btn btn-sm" routerLink="{{routerLink}}../user/{{u.following.username}}">
               <img class="d-flex justify-content-start" src="{{u.following.img_path}}" width="50px">
