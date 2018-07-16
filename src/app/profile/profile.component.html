@@ -206,7 +206,7 @@
     <!--</div>-->
 
     <div class="col-md-4">
-      <div *ngIf="(profile || admin || follow) && !edit">
+      <div class="container" *ngIf="(profile || admin || follow) && !edit">
       <h5 class="btn btn-block btn-lg" routerLink="/users"><strong><i class="fa fa-users fa-lg text-info"></i> Followings </strong></h5>
       <span *ngFor="let u of followings">
               <span class="btn btn-sm" routerLink="{{routerLink}}../user/{{u.following.username}}">
