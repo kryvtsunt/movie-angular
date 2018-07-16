@@ -44,7 +44,7 @@ export class FollowServiceClient {
   }
 
   findAllFollowings(userId) {
-    return fetch('http://localhost:4000/api/follow/user/' + userId + '/following', {
+    return fetch(HOST + 'api/follow/user/' + userId + '/following', {
     })
       .then(response => {
         return response.json();

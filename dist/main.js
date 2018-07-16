@@ -2131,7 +2131,7 @@ var FollowServiceClient = /** @class */ (function () {
         });
     };
     FollowServiceClient.prototype.findAllFollowings = function (userId) {
-        return fetch('http://localhost:4000/api/follow/user/' + userId + '/following', {})
+        return fetch(HOST + 'api/follow/user/' + userId + '/following', {})
             .then(function (response) {
             return response.json();
         });
